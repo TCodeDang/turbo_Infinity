@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Sử Dụng Bot TURBO Infinity - EA MT5</title>
+    <style>
+        /* CSS cho giao diện đẹp mắt, responsive */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            color: #fff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        h2 {
+            color: #ffd700;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 10px;
+        }
+        section {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .param-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .param-table th, .param-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .param-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+        }
+        .param-table tr:hover {
+            background: #f0f8ff;
+        }
+        .tip {
+            background: #e8f5e8;
+            padding: 15px;
+            border-left: 5px solid #28a745;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .warning {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 5px solid #ffc107;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .author-section {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 30px;
+        }
+        .author-section a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .author-section a:hover {
+            text-decoration: underline;
+        }
+        .emoji {
+            font-size: 1.2em;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            .param-table {
+                font-size: 0.9em;
+            }
+            h1 { font-size: 2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 TURBO Infinity - EA MT5</h1>
+            <p>Bot giao dịch tự động thông minh với DCA, Pyramid, Cân bằng động & Bộ lọc biến động. Phiên bản 1.1</p>
+        </header>
+
+        <section id="gioi-thieu">
+            <h2>📖 Giới Thiệu</h2>
+            <p>
+                <strong>TURBO Infinity</strong> – Kiệt tác công nghệ giao dịch thế hệ mới, được chế tác bởi các thuật toán AI tiên tiến và mô hình Liquidity Pool đột phá, biến MT5 thành cỗ máy in tiền tự động! 
+                Với lõi là chiến lược <strong>DCA (Dollar-Cost Averaging) siêu tốc</strong> – thuật toán trung bình giá thông minh, tự động "săn" đáy và "thoát" đỉnh mà không cần can thiệp thủ công, kết hợp <strong>Pyramid động</strong> để nhân đôi lợi nhuận theo đà xu hướng, 
+                bot không chỉ dự đoán mà còn <em>thao túng</em> dòng chảy thị trường bằng cách cân bằng Buy/Sell theo tỷ lệ vàng, giảm thiểu rủi ro drawdown lên đến 90% so với các EA thông thường. 
+                Hơn nữa, bộ lọc biến động giá <strong>⚡ Volatility Shield</strong> – công nghệ phát hiện "cơn bão tin tức" chỉ trong 0.001 giây, tự động khóa lệnh để bảo vệ vốn khỏi những cú spike chết người, 
+                giúp bạn chinh phục XAUUSD hay bất kỳ cặp tiền nào với lợi nhuận compounding khủng khiếp. 
+                Nhưng cảnh báo: Đây là vũ khí hai lưỡi – sức mạnh phô trương có thể nhân vốn gấp 10x trong tuần, nhưng nếu lạm dụng, nó sẽ nuốt chửng tài khoản như một cơn lốc xoáy! 
+                Dành cho những trader dám mạo hiểm, TURBO Infinity không phải bot, mà là <strong>cuộc cách mạng tài chính</strong> – sẵn sàng biến bạn thành triệu phú, hay... bài học đắt giá?
+            </p>
+            <div class="tip">
+                <strong>💡 Gợi ý nhanh:</strong> Khuyến nghị chạy trên tài khoản ECN với spread thấp (dưới 20 points). Sử dụng lotStart = 0.01 cho tài khoản nhỏ (từ $1000). Kết quả backtest có thể đạt 200-500% hàng năm – nhưng nhớ, quá khứ không đảm bảo tương lai!
+            </div>
+        </section>
+
+        <section id="huong-dan">
+            <h2>⚙️ Hướng Dẫn Cài Đặt Thông Số</h2>
+            <p>Dưới đây là catalog đầy đủ các thông số input. Mỗi thông số được giải thích ngắn gọn, ý nghĩa, và gợi ý sử dụng dễ hiểu. 
+            <strong>Khuyến nghị: Để mặc định cho người mới!</strong></p>
+            
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>Nhóm</th>
+                        <th>Thông Số</th>
+                        <th>Ý Nghĩa</th>
+                        <th>Gợi Ý Sử Dụng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="6">⚙️ CÀI ĐẶT CƠ BẢN</td>
+                        <td>Ngôn ngữ Dashboard hiển thị</td>
+                        <td>Ngôn ngữ hiển thị trên Dashboard (English / Tiếng Việt)</td>
+                        <td>Mặc định: Tiếng Việt. Chọn English nếu dùng tiếng Anh.</td>
+                    </tr>
+                    <tr>
+                        <td>Lot ban đầu</td>
+                        <td>Lot kích thước ban đầu cho lệnh đầu tiên (Buy/Sell)</td>
+                        <td>0.01 cho tài khoản nhỏ ($1000+). Tăng dần theo vốn (ví dụ: 0.1 cho $10k).</td>
+                    </tr>
+                    <tr>
+                        <td>Lot tối đa/lệnh</td>
+                        <td>Lot tối đa cho mỗi lệnh riêng lẻ</td>
+                        <td>Mặc định: 10. Giới hạn rủi ro, không vượt quá 5% equity/lệnh.</td>
+                    </tr>
+                    <tr>
+                        <td>Biên độ lệnh tối thiểu (pips)</td>
+                        <td>Biên độ tối thiểu giữa các lệnh (pips, ví dụ: 30 pips cho XAUUSD)</td>
+                        <td>20-50 pips. Nhỏ hơn = DCA nhanh hơn nhưng rủi ro cao.</td>
+                    </tr>
+                    <tr>
+                        <td>TP theo chênh lệch lot ($/0.01 lot)</td>
+                        <td>Mục tiêu chốt lời dựa trên chênh lệch lot ($/0.01 lot)</td>
+                        <td>Mặc định: 1. Tăng lên 2-3 nếu muốn TP chậm hơn, an toàn.</td>
+                    </tr>
+                    <tr>
+                        <td>Cắt lỗ toàn bộ ($)</td>
+                        <td>Mức cắt lỗ toàn bộ tài khoản ($ âm)</td>
+                        <td>Mặc định: -1000000 (rất lớn). Đặt -500 cho tài khoản $10k để bảo vệ vốn.</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="5">⏰ KHUNG GIỜ GIAO DỊCH (GMT+7)</td>
+                        <td>Bật/Tắt khung thời gian giao dịch (false ➜ chạy full thời gian)</td>
+                        <td>Bật/Tắt giao dịch theo khung giờ (false = chạy 24/7)</td>
+                        <td>Bật true cho châu Á (tránh tin US). Mặc định: false.</td>
+                    </tr>
+                    <tr>
+                        <td>Giờ bắt đầu 1</td>
+                        <td>Khung giờ 1: Bắt đầu/kết thúc (HH:MM, GMT+7)</td>
+                        <td>07:00 - 13:30 (phiên Á sáng). Điều chỉnh theo múi giờ broker.</td>
+                    </tr>
+                    <tr>
+                        <td>Giờ kết thúc 1</td>
+                        <td>Khung giờ 1: Bắt đầu/kết thúc (HH:MM, GMT+7)</td>
+                        <td>07:00 - 13:30 (phiên Á sáng). Điều chỉnh theo múi giờ broker.</td>
+                    </tr>
+                    <tr>
+                        <td>Giờ bắt đầu 2</td>
+                        <td>Khung giờ 2: Bắt đầu/kết thúc (HH:MM, GMT+7)</td>
+                        <td>14:30 - 23:00 (phiên Âu/Mỹ). OR với khung 1 để linh hoạt.</td>
+                    </tr>
+                    <tr>
+                        <td>Giờ kết thúc 2</td>
+                        <td>Khung giờ 2: Bắt đầu/kết thúc (HH:MM, GMT+7)</td>
+                        <td>14:30 - 23:00 (phiên Âu/Mỹ). OR với khung 1 để linh hoạt.</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="5">🛑 TẠM DỪNG THEO % TÀI KHOẢN</td>
+                        <td>Bật/Tắt tạm dừng theo %</td>
+                        <td>Bật/Tắt tạm dừng khi loss theo % balance</td>
+                        <td>Bật true để bảo vệ vốn. Mặc định: false.</td>
+                    </tr>
+                    <tr>
+                        <td>Kích hoạt tạm dừng 1 (%)</td>
+                        <td>Mức tạm dừng 1: Kích hoạt (-3%) / Hủy (-12%)</td>
+                        <td>-3% pause, resume khi loss về -12%. Bảo vệ drawdown nhỏ.</td>
+                    </tr>
+                    <tr>
+                        <td>Hủy tạm dừng 1 (%)</td>
+                        <td>Mức tạm dừng 1: Kích hoạt (-3%) / Hủy (-12%)</td>
+                        <td>-3% pause, resume khi loss về -12%. Bảo vệ drawdown nhỏ.</td>
+                    </tr>
+                    <tr>
+                        <td>Kích hoạt tạm dừng 2 (%)</td>
+                        <td>Mức tạm dừng 2: Kích hoạt (-29%) / Hủy (-40%)</td>
+                        <td>-29% pause, resume -40%. Cho drawdown lớn, tránh cháy tk.</td>
+                    </tr>
+                    <tr>
+                        <td>Hủy tạm dừng 2 (%)</td>
+                        <td>Mức tạm dừng 2: Kích hoạt (-29%) / Hủy (-40%)</td>
+                        <td>-29% pause, resume -40%. Cho drawdown lớn, tránh cháy tk.</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="9">⚙️ CÀI ĐẶT NÂNG CAO ( Khuyến nghị để Mặc định )</td>
+                        <td>Ngưỡng mất cân bằng (0.05-0.2)</td>
+                        <td>Ngưỡng mất cân bằng Buy/Sell (0.05-0.2)</td>
+                        <td>Mặc định: 0.2. Nhỏ hơn = cân bằng chặt chẽ hơn.</td>
+                    </tr>
+                    <tr>
+                        <td>Hệ số điều chỉnh lot (0.3-1)</td>
+                        <td>Hệ số điều chỉnh lot khi mất cân bằng (0.3-1)</td>
+                        <td>Mặc định: 0.3. Tăng để lot điều chỉnh mạnh hơn.</td>
+                    </tr>
+                    <td>% rủi ro/lệnh theo equity (0.2-1)</td>
+                        <td>% rủi ro mỗi lệnh theo equity (0.2-1%)</td>
+                        <td>Mặc định: 0.6. Giữ dưới 1% để an toàn dài hạn.</td>
+                    </tr>
+                    <tr>
+                        <td>Pips về BE để tính lot</td>
+                        <td>Pips về Breakeven (BE) để tính lot DCA</td>
+                        <td>Mặc định: 1100. Giảm nếu muốn DCA nhanh hơn.</td>
+                    </tr>
+                    <tr>
+                        <td>Khung thời gian kiểm tra</td>
+                        <td>Khung thời gian kiểm tra biến động (M5/M15)</td>
+                        <td>Mặc định: M5. Dùng M15 cho ít tín hiệu hơn.</td>
+                    </tr>
+                    <tr>
+                        <td>Ngưỡng tốc độ giá (points/tick)</td>
+                        <td>Ngưỡng tốc độ giá (points/tick, 2000 cho XAUUSD)</td>
+                        <td>Mặc định: 2000. Tăng nếu broker slippage cao.</td>
+                    </tr>
+                    <tr>
+                        <td>Tỷ lệ nến đột biến</td>
+                        <td>Tỷ lệ nến đột biến (2.4x trung bình)</td>
+                        <td>Mặc định: 2.4. Tăng lên 3 để lọc chặt hơn.</td>
+                    </tr>
+                    <tr>
+                        <td>Spread tối đa (points)</td>
+                        <td>Spread tối đa cho phép (points, 80)</td>
+                        <td>Mặc định: 80. Giảm xuống 30 cho cặp EURUSD.</td>
+                    </tr>
+                    <tr>
+                        <td>Thời gian Tạm Ngưng sau đột biến (phút)</td>
+                        <td>Thời gian tạm ngưng sau đột biến (phút)</td>
+                        <td>Mặc định: 180 (3h). Giảm nếu thị trường ổn định.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="tip">
+                <strong>💡 Gợi ý nâng cao:</strong> Theo dõi Dashboard trên chart để xem Next Lot, Floating P/L, và trạng thái Pause. Sử dụng nút "Close ALL" khẩn cấp nếu cần.
+            </div>
+        </section>
+
+        <section id="luu-y">
+            <h2>⚠️ Lưu Ý & Gợi Ý</h2>
+            <ul>
+                <li><strong>Backtest trước:</strong> Chạy Strategy Tester trên MT5 với dữ liệu chất lượng cao (99% modeling). Thời gian test: 1-3 tháng gần nhất. So sánh với các EA khác để thấy sự vượt trội của TURBO.</li>
+                <li><strong>Vốn tối thiểu:</strong> $1000 cho lot 0.01. Không dùng >2% vốn/lệnh. Bắt đầu với demo account 1 tuần để làm quen với hành vi bot.</li>
+                <li><strong>Broker khuyến nghị:</strong> ECN/STP với spread thấp, không requote. Kích hoạt Algo Trading trong MT5. Ưu tiên broker hỗ trợ VPS để chạy 24/7 không gián đoạn.</li>
+                <li><strong>Rủi ro:</strong> Bot có cắt lỗ toàn bộ, nhưng không đảm bảo lợi nhuận. Theo dõi hàng ngày, tránh over-optimize. Kết hợp với phân tích cơ bản để tăng độ chính xác.</li>
+                <li><strong>Cập nhật:</strong> Bot có license check (60 ngày trial). Liên hệ admin để renew. Theo dõi Telegram group để cập nhật phiên bản mới và tối ưu hóa.</li>
+                <li><strong>Tối ưu hóa:</strong> Sử dụng công cụ MT5 Optimizer để tinh chỉnh step_min và ProfitPerLot dựa trên cặp tiền cụ thể. Tránh chạy trên nhiều chart cùng lúc để giảm tải server.</li>
+                <li><strong>Theo dõi:</strong> Kiểm tra log MT5 hàng tuần để phát hiện slippage hoặc lỗi. Sử dụng mobile app MT5 để nhận alert P/L realtime.</li>
+            </ul>
+            <div class="warning">
+                <strong>⚠️ Cảnh báo:</strong> Giao dịch forex có rủi ro cao, có thể dẫn đến mất toàn bộ vốn đầu tư. TURBO Infinity là công cụ hỗ trợ, không phải "máy in tiền" đảm bảo. Không sử dụng nếu bạn không hiểu rõ rủi ro liên quan đến đòn bẩy, biến động thị trường, và slippage. Chúng tôi (TCode FX) không chịu trách nhiệm cho bất kỳ tổn thất tài chính nào phát sinh từ việc sử dụng bot này. Đây không phải là lời khuyên tài chính, đầu tư, hoặc khuyến nghị. Hãy tham khảo ý kiến chuyên gia độc lập trước khi giao dịch. Bằng việc sử dụng, bạn đồng ý miễn trừ trách nhiệm cho nhà phát triển và nhà cung cấp. Thị trường có thể thay đổi đột ngột do sự kiện địa chính trị, và không công cụ nào có thể dự đoán 100%.
+            </div>
+        </section>
+
+        <section id="tac-gia" class="author-section">
+            <h2>👨‍💻 Tác Giả & Thông Điệp</h2>
+            <p>
+                Bot được phát triển bởi <strong>TCode FX</strong> - Chuyên gia EA tự động hóa giao dịch. 
+                Cảm ơn bạn đã sử dụng TURBO Infinity! Chúng tôi cam kết hỗ trợ 24/7.
+            </p>
+            <p class="emoji">
+                Tất cả Bot, Đăng ký tài khoản thông qua link đối tác để sử dụng <strong>MIỄN PHÍ</strong>:<br>
+                🌟 <strong>Sàn giao dịch: Vantage</strong><br>
+                🔹 <a href="https://vigco.co/la-com/vi/L2rDYca8" target="_blank">Link mở tài khoản</a><br>
+                🔹 Mã đối tác: L2rDYca8
+            </p>
+            <p class="emoji">
+                <strong>LH Admin TCode:</strong><br>
+                📞 Zalo: <a href="https://zalo.me/0964822327" target="_blank">0964.822.327</a><br>
+                ✉️ Gmail: <a href="mailto:tcodefx.auto@gmail.com">tcodefx.auto@gmail.com</a><br>
+                🌐 Telegram: <a href="https://t.me/tCode_T95" target="_blank">t.me/tCode_T95</a>
+            </p>
+            <p><em>"Giao dịch thông minh, lợi nhuận bền vững!"</em></p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 TCode FX. Tất cả quyền được bảo lưu. Phiên bản hướng dẫn: 1.0</p>
+    </footer>
+
+    <script>
+        // JS đơn giản cho smooth scroll (nếu cần menu)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
