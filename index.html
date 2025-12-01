@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hướng Dẫn Sử Dụng Bot TURBO Infinity - EA MT5</title>
     <style>
-        /* CSS cho giao diện đẹp mắt, responsive */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
             color: #333;
             line-height: 1.6;
         }
@@ -21,278 +20,529 @@
         }
         header {
             text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(255,255,255,0.15) 100%);
+            padding: 50px 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,215,0,0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        header p {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 0.5px;
         }
         h1 {
-            color: #fff;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #ffd700;
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(255,215,0,0.5), 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: 700;
+            letter-spacing: 1px;
         }
         h2 {
-            color: #ffd700;
-            border-bottom: 2px solid #ffd700;
-            padding-bottom: 10px;
+            color: #2c5364;
+            border-bottom: 3px solid #ffd700;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
         section {
-            background: rgba(255, 255, 255, 0.95);
-            margin: 20px 0;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            margin: 25px 0;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,215,0,0.1);
+        }
+        section h3 {
+            color: #2c5364;
+            font-size: 1.3em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        section p {
+            color: #2c3e50;
+            line-height: 1.8;
         }
         .param-table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-radius: 10px;
+            overflow: hidden;
         }
         .param-table th, .param-table td {
-            padding: 12px;
+            padding: 15px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #e8e8e8;
         }
         .param-table th {
-            background: #f8f9fa;
-            font-weight: bold;
+            background: linear-gradient(135deg, #2c5364 0%, #0f2027 100%);
+            color: #ffd700;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
         }
-        .param-table tr:hover {
-            background: #f0f8ff;
+        .param-table td {
+            color: #2c3e50;
+            background: #fff;
+        }
+        .param-table tr:hover td {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+            transition: all 0.3s ease;
         }
         .tip {
-            background: #e8f5e8;
-            padding: 15px;
-            border-left: 5px solid #28a745;
-            margin: 10px 0;
-            border-radius: 5px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            padding: 20px;
+            border-left: 5px solid #4caf50;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(76,175,80,0.2);
+            color: #2c3e50;
+        }
+        .tip strong {
+            color: #2e7d32;
         }
         .warning {
-            background: #fff3cd;
-            padding: 15px;
-            border-left: 5px solid #ffc107;
-            margin: 10px 0;
-            border-radius: 5px;
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            padding: 20px;
+            border-left: 5px solid #ff9800;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255,152,0,0.2);
+            color: #2c3e50;
+        }
+        .warning strong {
+            color: #e65100;
+        }
+        .warning p {
+            margin: 8px 0;
+            line-height: 1.7;
         }
         .author-section {
             text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #2c5364 0%, #0f2027 100%);
             color: #fff;
-            padding: 30px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,215,0,0.2);
+        }
+        .author-section h2 {
+            color: #ffd700;
+            border-bottom: 3px solid #ffd700;
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        .author-section p {
+            color: rgba(255,255,255,0.95);
+            line-height: 1.8;
+            margin: 15px 0;
         }
         .author-section a {
             color: #ffd700;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
         .author-section a:hover {
-            text-decoration: underline;
-        }
-        .emoji {
-            font-size: 1.2em;
+            color: #ffed4e;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
         }
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 25px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95em;
+            margin-top: 30px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        ul li {
+            margin: 12px 0;
+            color: #2c3e50;
+            line-height: 1.7;
+        }
+        ul li strong {
+            color: #2c5364;
+        }
+        /* Styles cho param groups */
+        .param-group {
+            margin: 30px 0;
+            border: 2px solid #e8e8e8;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .param-group-header {
+            background: linear-gradient(135deg, #2c5364 0%, #0f2027 100%);
             color: #fff;
-            font-size: 0.9em;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .param-group-header h3 {
+            margin: 0;
+            color: #ffd700;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+        .group-icon {
+            font-size: 1.8em;
+        }
+        .advanced-badge {
+            margin-left: auto;
+            background: rgba(255,215,0,0.2);
+            color: #ffd700;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+        .param-item {
+            padding: 20px 25px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+        .param-item:last-child {
+            border-bottom: none;
+        }
+        .param-item:hover {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+            padding-left: 30px;
+        }
+        .param-name {
+            font-weight: 600;
+            color: #2c5364;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .param-name::before {
+            content: "▸";
+            color: #ffd700;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .param-description {
+            color: #555;
+            line-height: 1.7;
+            padding-left: 20px;
+        }
+        .param-suggest {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            border-left: 3px solid #4caf50;
+            border-radius: 5px;
+            font-size: 0.95em;
+            color: #2e7d32;
         }
         @media (max-width: 768px) {
             .param-table {
-                font-size: 0.9em;
+                font-size: 0.85em;
             }
-            h1 { font-size: 2em; }
+            .param-table th, .param-table td {
+                padding: 10px;
+            }
+            h1 { 
+                font-size: 2em; 
+            }
+            header {
+                padding: 30px 20px;
+            }
+            section {
+                padding: 25px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🤖 TURBO Infinity - EA MT5</h1>
-            <p>Bot giao dịch tự động thông minh với DCA, Pyramid, Cân bằng động & Bộ lọc biến động. Phiên bản 1.1</p>
+            <h1>🚀 TURBO Infinity - EA MT5</h1>
+            <p>EA giao dịch dựa trên Cân Bằng Động realtime - Phiên bản 1.1</p>
         </header>
 
         <section id="gioi-thieu">
-            <h2>📖 Giới Thiệu</h2>
+            <h2>📌 Giới Thiệu</h2>
+            <h3>TURBO Infinity – EA giao dịch dựa trên Cân Bằng Động realtime</h3>
             <p>
-                <strong>TURBO Infinity</strong> – Kiệt tác công nghệ giao dịch thế hệ mới, được chế tác bởi các thuật toán AI tiên tiến và mô hình Liquidity Pool đột phá, biến MT5 thành cỗ máy in tiền tự động! 
-                Với lõi là chiến lược <strong>DCA (Dollar-Cost Averaging) siêu tốc</strong> – thuật toán trung bình giá thông minh, tự động "săn" đáy và "thoát" đỉnh mà không cần can thiệp thủ công, kết hợp <strong>Pyramid động</strong> để nhân đôi lợi nhuận theo đà xu hướng, 
-                bot không chỉ dự đoán mà còn <em>thao túng</em> dòng chảy thị trường bằng cách cân bằng Buy/Sell theo tỷ lệ vàng, giảm thiểu rủi ro drawdown lên đến 90% so với các EA thông thường. 
-                Hơn nữa, bộ lọc biến động giá <strong>⚡ Volatility Shield</strong> – công nghệ phát hiện "cơn bão tin tức" chỉ trong 0.001 giây, tự động khóa lệnh để bảo vệ vốn khỏi những cú spike chết người, 
-                giúp bạn chinh phục XAUUSD hay bất kỳ cặp tiền nào với lợi nhuận compounding khủng khiếp. 
-                Nhưng cảnh báo: Đây là vũ khí hai lưỡi – sức mạnh phô trương có thể nhân vốn gấp 10x trong tuần, nhưng nếu lạm dụng, nó sẽ nuốt chửng tài khoản như một cơn lốc xoáy! 
-                Dành cho những trader dám mạo hiểm, TURBO Infinity không phải bot, mà là <strong>cuộc cách mạng tài chính</strong> – sẵn sàng biến bạn thành triệu phú, hay... bài học đắt giá?
+                <strong>TURBO Infinity</strong> là EA MT5 vận hành theo cơ chế Cân Bằng Động, liên tục điều chỉnh Buy – Sell theo biến động thực tế. Hệ thống sử dụng Liquidity Pool Balancer để tự động cân đối lot, cập nhật Target BE và tối ưu PnL, hạn chế lệch vị thế khi thị trường đổi trạng thái.
+            </p>
+            <p>
+                EA bám sát biên độ dao động realtime để quyết định điểm vào/thoát, phân bổ khoảng cách lệnh hợp lý, tăng/giảm lot và điều chỉnh mục tiêu lợi nhuận theo điều kiện thị trường.
+            </p>
+            <p>
+                TURBO Infinity thuộc nhóm EA giao dịch nhanh, ưu tiên vòng quay vốn và khả năng thu hồi vốn sớm. Đổi lại, hiệu suất cao đi kèm rủi ro lớn, đặc biệt khi thị trường biến động mạnh hoặc người dùng tăng khối lượng quá mức an toàn.
             </p>
             <div class="tip">
-                <strong>💡 Gợi ý nhanh:</strong> Khuyến nghị chạy trên tài khoản ECN với spread thấp (dưới 20 points). Sử dụng lotStart = 0.01 cho tài khoản nhỏ (từ $1000). Kết quả backtest có thể đạt 200-500% hàng năm – nhưng nhớ, quá khứ không đảm bảo tương lai!
+                <strong>💡 Gợi ý nhanh:</strong><br>
+                • Nên chạy trên tài khoản Cent để giảm rủi ro và dễ kiểm soát biến động.<br>
+                • Vốn tối thiểu đề xuất: 30.000 Cent (tương đương ~300 USD khi chuyển sang tài khoản Cent).<br>
+                • Cặp giao dịch: XAUUSD.<br>
+                • Kết quả chạy real 1 tháng: khoảng 5% – 20%/ngày tùy điều kiện thị trường và cấu hình.<br>
+                • Backtest: có thể đạt 200% – 500%/tháng, nhưng kết quả quá khứ không đảm bảo lợi nhuận trong tương lai.
             </div>
         </section>
 
         <section id="huong-dan">
             <h2>⚙️ Hướng Dẫn Cài Đặt Thông Số</h2>
-            <p>Dưới đây là catalog đầy đủ các thông số input. Mỗi thông số được giải thích ngắn gọn, ý nghĩa, và gợi ý sử dụng dễ hiểu. 
-            <strong>Khuyến nghị: Để mặc định cho người mới!</strong></p>
-            
-            <table class="param-table">
-                <thead>
-                    <tr>
-                        <th>Nhóm</th>
-                        <th>Thông Số</th>
-                        <th>Ý Nghĩa</th>
-                        <th>Gợi Ý Sử Dụng</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td rowspan="6">⚙️ CÀI ĐẶT CƠ BẢN</td>
-                        <td>Ngôn ngữ Dashboard hiển thị</td>
-                        <td>Ngôn ngữ hiển thị trên Dashboard (English / Tiếng Việt)</td>
-                        <td>Mặc định: Tiếng Việt. Chọn English nếu dùng tiếng Anh.</td>
-                    </tr>
-                    <tr>
-                        <td>Lot ban đầu</td>
-                        <td>Lot kích thước ban đầu cho lệnh đầu tiên (Buy/Sell)</td>
-                        <td>0.01 cho tài khoản nhỏ ($1000+). Tăng dần theo vốn (ví dụ: 0.1 cho $10k).</td>
-                    </tr>
-                    <tr>
-                        <td>Lot tối đa/lệnh</td>
-                        <td>Lot tối đa cho mỗi lệnh riêng lẻ</td>
-                        <td>Mặc định: 10. Giới hạn rủi ro, không vượt quá 5% equity/lệnh.</td>
-                    </tr>
-                    <tr>
-                        <td>Biên độ lệnh tối thiểu (pips)</td>
-                        <td>Biên độ tối thiểu giữa các lệnh (pips, ví dụ: 30 pips cho XAUUSD)</td>
-                        <td>20-50 pips. Nhỏ hơn = DCA nhanh hơn nhưng rủi ro cao.</td>
-                    </tr>
-                    <tr>
-                        <td>TP theo chênh lệch lot ($/0.01 lot)</td>
-                        <td>Mục tiêu chốt lời dựa trên chênh lệch lot ($/0.01 lot)</td>
-                        <td>Mặc định: 1. Tăng lên 2-3 nếu muốn TP chậm hơn, an toàn.</td>
-                    </tr>
-                    <tr>
-                        <td>Cắt lỗ toàn bộ ($)</td>
-                        <td>Mức cắt lỗ toàn bộ tài khoản ($ âm)</td>
-                        <td>Mặc định: -1000000 (rất lớn). Đặt -500 cho tài khoản $10k để bảo vệ vốn.</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="5">⏰ KHUNG GIỜ GIAO DỊCH (GMT+7)</td>
-                        <td>Bật/Tắt khung thời gian giao dịch (false ➜ chạy full thời gian)</td>
-                        <td>Bật/Tắt giao dịch theo khung giờ (false = chạy 24/7)</td>
-                        <td>Bật true cho châu Á (tránh tin US). Mặc định: false.</td>
-                    </tr>
-                    <tr>
-                        <td>Giờ bắt đầu 1</td>
-                        <td>Khung giờ 1: Bắt đầu/kết thúc (HH:MM, GMT+7)</td>
-                        <td>07:00 - 13:30 (phiên Á sáng). Điều chỉnh theo múi giờ broker.</td>
-                    </tr>
-                    <tr>
-                        <td>Giờ kết thúc 1</td>
-                        <td>Khung giờ 1: Bắt đầu/kết thúc (HH:MM, GMT+7)</td>
-                        <td>07:00 - 13:30 (phiên Á sáng). Điều chỉnh theo múi giờ broker.</td>
-                    </tr>
-                    <tr>
-                        <td>Giờ bắt đầu 2</td>
-                        <td>Khung giờ 2: Bắt đầu/kết thúc (HH:MM, GMT+7)</td>
-                        <td>14:30 - 23:00 (phiên Âu/Mỹ). OR với khung 1 để linh hoạt.</td>
-                    </tr>
-                    <tr>
-                        <td>Giờ kết thúc 2</td>
-                        <td>Khung giờ 2: Bắt đầu/kết thúc (HH:MM, GMT+7)</td>
-                        <td>14:30 - 23:00 (phiên Âu/Mỹ). OR với khung 1 để linh hoạt.</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="5">🛑 TẠM DỪNG THEO % TÀI KHOẢN</td>
-                        <td>Bật/Tắt tạm dừng theo %</td>
-                        <td>Bật/Tắt tạm dừng khi loss theo % balance</td>
-                        <td>Bật true để bảo vệ vốn. Mặc định: false.</td>
-                    </tr>
-                    <tr>
-                        <td>Kích hoạt tạm dừng 1 (%)</td>
-                        <td>Mức tạm dừng 1: Kích hoạt (-3%) / Hủy (-12%)</td>
-                        <td>-3% pause, resume khi loss về -12%. Bảo vệ drawdown nhỏ.</td>
-                    </tr>
-                    <tr>
-                        <td>Hủy tạm dừng 1 (%)</td>
-                        <td>Mức tạm dừng 1: Kích hoạt (-3%) / Hủy (-12%)</td>
-                        <td>-3% pause, resume khi loss về -12%. Bảo vệ drawdown nhỏ.</td>
-                    </tr>
-                    <tr>
-                        <td>Kích hoạt tạm dừng 2 (%)</td>
-                        <td>Mức tạm dừng 2: Kích hoạt (-29%) / Hủy (-40%)</td>
-                        <td>-29% pause, resume -40%. Cho drawdown lớn, tránh cháy tk.</td>
-                    </tr>
-                    <tr>
-                        <td>Hủy tạm dừng 2 (%)</td>
-                        <td>Mức tạm dừng 2: Kích hoạt (-29%) / Hủy (-40%)</td>
-                        <td>-29% pause, resume -40%. Cho drawdown lớn, tránh cháy tk.</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="9">⚙️ CÀI ĐẶT NÂNG CAO ( Khuyến nghị để Mặc định )</td>
-                        <td>Ngưỡng mất cân bằng (0.05-0.2)</td>
-                        <td>Ngưỡng mất cân bằng Buy/Sell (0.05-0.2)</td>
-                        <td>Mặc định: 0.2. Nhỏ hơn = cân bằng chặt chẽ hơn.</td>
-                    </tr>
-                    <tr>
-                        <td>Hệ số điều chỉnh lot (0.3-1)</td>
-                        <td>Hệ số điều chỉnh lot khi mất cân bằng (0.3-1)</td>
-                        <td>Mặc định: 0.3. Tăng để lot điều chỉnh mạnh hơn.</td>
-                    </tr>
-                    <td>% rủi ro/lệnh theo equity (0.2-1)</td>
-                        <td>% rủi ro mỗi lệnh theo equity (0.2-1%)</td>
-                        <td>Mặc định: 0.6. Giữ dưới 1% để an toàn dài hạn.</td>
-                    </tr>
-                    <tr>
-                        <td>Pips về BE để tính lot</td>
-                        <td>Pips về Breakeven (BE) để tính lot DCA</td>
-                        <td>Mặc định: 1100. Giảm nếu muốn DCA nhanh hơn.</td>
-                    </tr>
-                    <tr>
-                        <td>Khung thời gian kiểm tra</td>
-                        <td>Khung thời gian kiểm tra biến động (M5/M15)</td>
-                        <td>Mặc định: M5. Dùng M15 cho ít tín hiệu hơn.</td>
-                    </tr>
-                    <tr>
-                        <td>Ngưỡng tốc độ giá (points/tick)</td>
-                        <td>Ngưỡng tốc độ giá (points/tick, 2000 cho XAUUSD)</td>
-                        <td>Mặc định: 2000. Tăng nếu broker slippage cao.</td>
-                    </tr>
-                    <tr>
-                        <td>Tỷ lệ nến đột biến</td>
-                        <td>Tỷ lệ nến đột biến (2.4x trung bình)</td>
-                        <td>Mặc định: 2.4. Tăng lên 3 để lọc chặt hơn.</td>
-                    </tr>
-                    <tr>
-                        <td>Spread tối đa (points)</td>
-                        <td>Spread tối đa cho phép (points, 80)</td>
-                        <td>Mặc định: 80. Giảm xuống 30 cho cặp EURUSD.</td>
-                    </tr>
-                    <tr>
-                        <td>Thời gian Tạm Ngưng sau đột biến (phút)</td>
-                        <td>Thời gian tạm ngưng sau đột biến (phút)</td>
-                        <td>Mặc định: 180 (3h). Giảm nếu thị trường ổn định.</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="tip">
-                <strong>💡 Gợi ý nâng cao:</strong> Theo dõi Dashboard trên chart để xem Next Lot, Floating P/L, và trạng thái Pause. Sử dụng nút "Close ALL" khẩn cấp nếu cần.
+            <p style="text-align: center; font-size: 1.05em; color: #555; margin-bottom: 30px;">
+                Dưới đây là hướng dẫn chi tiết từng nhóm thông số. Mỗi thông số đều có giải thích rõ ràng để bạn dễ dàng hiểu và cài đặt.
+            </p>
+
+            <!-- Nhóm 1: Cài đặt cơ bản -->
+            <div class="param-group">
+                <div class="param-group-header">
+                    <span class="group-icon">🔧</span>
+                    <h3>CÀI ĐẶT CƠ BẢN</h3>
+                </div>
+                
+                <div class="param-item">
+                    <div class="param-name">Ngôn ngữ Dashboard hiển thị</div>
+                    <div class="param-description">
+                        Chọn ngôn ngữ hiển thị thông tin trên màn hình: <strong>Tiếng Việt</strong> hoặc <strong>English</strong>. Giúp người dùng theo dõi trạng thái bot dễ dàng hơn.
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Lot ban đầu</div>
+                    <div class="param-description">
+                        Khối lượng giao dịch cho lệnh đầu tiên. Lot càng lớn thì lợi nhuận và rủi ro càng cao. <br>
+                        <span class="param-suggest">💡 Khuyến nghị: Bắt đầu với <strong>0.01</strong> để kiểm soát vốn.</span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Lot tối đa/lệnh</div>
+                    <div class="param-description">
+                        Giới hạn khối lượng tối đa cho một lệnh. Bảo vệ tài khoản khỏi rủi ro quá lớn khi EA tăng lot tự động.<br>
+                        <span class="param-suggest">💡 Khuyến nghị: <strong>10</strong> (mặc định)</span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Biên độ lệnh tối thiểu (pips)</div>
+                    <div class="param-description">
+                        Khoảng cách tối thiểu giữa các lệnh Buy hoặc Sell (tính bằng pips). Giá trị nhỏ sẽ mở lệnh dày đặc hơn, giá trị lớn sẽ giãn cách lệnh ra.<br>
+                        <span class="param-suggest">💡 Khuyến nghị: <strong>20-50 pips</strong> tùy theo chiến lược</span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">TP theo chênh lệch lot ($/0.01 lot)</div>
+                    <div class="param-description">
+                        Mục tiêu lợi nhuận tính theo chênh lệch lot giữa Buy và Sell. <br>
+                        <em>Ví dụ:</em> Nếu chênh 0.1 lot và giá trị này là <strong>1</strong>, thì TP khoảng 10$.<br>
+                        <span class="param-suggest">💡 Tăng giá trị để chốt lời chậm hơn nhưng an toàn hơn.</span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Cắt lỗ toàn bộ ($)</div>
+                    <div class="param-description">
+                        Mức lỗ tối đa cho phép (số âm). Khi tổng lỗ đạt mức này, EA sẽ đóng toàn bộ lệnh để bảo vệ vốn.<br>
+                        <span class="param-suggest">⚠️ Quan trọng: Đặt giá trị hợp lý với số dư tài khoản (ví dụ: <strong>-500$</strong> cho tài khoản 10k)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nhóm 2: Khung giờ -->
+            <div class="param-group">
+                <div class="param-group-header">
+                    <span class="group-icon">⏰</span>
+                    <h3>KHUNG GIỜ GIAO DỊCH (GMT+7)</h3>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Bật/Tắt khung thời gian giao dịch</div>
+                    <div class="param-description">
+                        Chọn <strong>"true"</strong> để EA chỉ giao dịch trong khung giờ nhất định, <strong>"false"</strong> để chạy 24/7.<br>
+                        <span class="param-suggest">💡 Hữu ích để tránh các phiên có biến động bất thường hoặc tin tức quan trọng.</span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Giờ bắt đầu 1 & Giờ kết thúc 1</div>
+                    <div class="param-description">
+                        Khung giờ giao dịch thứ nhất (định dạng HH:MM).<br>
+                        <span class="param-suggest">💡 Ví dụ: <strong>07:00 - 13:30</strong> (phiên Á)</span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Giờ bắt đầu 2 & Giờ kết thúc 2</div>
+                    <div class="param-description">
+                        Khung giờ giao dịch thứ hai (định dạng HH:MM).<br>
+                        <span class="param-suggest">💡 Ví dụ: <strong>14:30 - 23:00</strong> (phiên Âu/Mỹ)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nhóm 3: Tạm dừng -->
+            <div class="param-group">
+                <div class="param-group-header">
+                    <span class="group-icon">⏸️</span>
+                    <h3>TẠM DỪNG THEO % TÀI KHOẢN</h3>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Bật/Tắt tạm dừng theo %</div>
+                    <div class="param-description">
+                        Chọn <strong>"true"</strong> để EA tự động tạm dừng giao dịch khi tài khoản lỗ đến mức % nhất định.<br>
+                        <span class="param-suggest">🛡️ Bảo vệ vốn trong điều kiện thị trường xấu.</span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Mức tạm dừng 1: Kích hoạt & Hủy</div>
+                    <div class="param-description">
+                        <strong>Kích hoạt:</strong> Mức lỗ % để tạm dừng (ví dụ: <strong>-3%</strong>)<br>
+                        <strong>Hủy:</strong> Mức lỗ % để tiếp tục giao dịch (ví dụ: <strong>-12%</strong>)<br>
+                        <span class="param-suggest">💡 Dùng cho drawdown nhỏ, bảo vệ vốn sớm.</span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Mức tạm dừng 2: Kích hoạt & Hủy</div>
+                    <div class="param-description">
+                        <strong>Kích hoạt:</strong> Mức lỗ % để tạm dừng (ví dụ: <strong>-29%</strong>)<br>
+                        <strong>Hủy:</strong> Mức lỗ % để tiếp tục giao dịch (ví dụ: <strong>-40%</strong>)<br>
+                        <span class="param-suggest">💡 Dùng cho drawdown lớn, tránh cháy tài khoản.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nhóm 4: Nâng cao -->
+            <div class="param-group">
+                <div class="param-group-header">
+                    <span class="group-icon">🔬</span>
+                    <h3>CÀI ĐẶT NÂNG CAO</h3>
+                    <span class="advanced-badge">Khuyến nghị để Mặc định</span>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Ngưỡng mất cân bằng (0.05-0.2)</div>
+                    <div class="param-description">
+                        Ngưỡng chênh lệch lot giữa Buy và Sell để kích hoạt cơ chế cân bằng.<br>
+                        <span class="param-suggest">💡 Giá trị nhỏ hơn = cân bằng nhanh và chặt chẽ hơn. Mặc định: <strong>0.2</strong></span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Hệ số điều chỉnh lot (0.3-1)</div>
+                    <div class="param-description">
+                        Mức độ mạnh yếu khi điều chỉnh lot để cân bằng vị thế.<br>
+                        <span class="param-suggest">💡 Giá trị cao = điều chỉnh mạnh. Mặc định: <strong>0.3</strong></span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">% rủi ro/lệnh theo equity (0.2-1)</div>
+                    <div class="param-description">
+                        Phần trăm vốn (equity) sử dụng để tính lot cho mỗi lệnh.<br>
+                        <span class="param-suggest">💡 Giá trị thấp = bảo toàn vốn lâu dài. Mặc định: <strong>0.6%</strong></span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Pips về BE để tính lot</div>
+                    <div class="param-description">
+                        Số pips cần thiết để giá về điểm hòa vốn (Breakeven), dùng để tính toán lot cho lệnh DCA.<br>
+                        <span class="param-suggest">💡 Mặc định: <strong>1100</strong>. Giảm xuống để DCA nhanh hơn.</span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Khung thời gian kiểm tra</div>
+                    <div class="param-description">
+                        Khung thời gian (M5, M15, v.v.) mà EA sử dụng để phân tích biến động thị trường.<br>
+                        <span class="param-suggest">💡 <strong>M5</strong> = nhạy hơn | <strong>M15</strong> = ổn định hơn</span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Ngưỡng tốc độ giá (points/tick)</div>
+                    <div class="param-description">
+                        Ngưỡng tốc độ thay đổi giá để phát hiện biến động mạnh.<br>
+                        <span class="param-suggest">💡 EA tạm dừng khi giá thay đổi nhanh hơn ngưỡng. Mặc định: <strong>2000</strong></span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Tỷ lệ nến đột biến</div>
+                    <div class="param-description">
+                        Tỷ lệ so sánh kích thước nến hiện tại với nến trung bình để phát hiện đột biến giá.<br>
+                        <span class="param-suggest">💡 Giá trị cao = lọc chặt hơn. Mặc định: <strong>2.4</strong></span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Spread tối đa (points)</div>
+                    <div class="param-description">
+                        Spread tối đa cho phép (khoảng cách giữa giá mua và bán).<br>
+                        <span class="param-suggest">💡 EA không mở lệnh khi spread > ngưỡng. Mặc định: <strong>80</strong></span>
+                    </div>
+                </div>
+
+                <div class="param-item">
+                    <div class="param-name">Thời gian Tạm Ngừng sau đột biến (phút)</div>
+                    <div class="param-description">
+                        Thời gian EA tạm ngừng giao dịch sau khi phát hiện đột biến giá mạnh.<br>
+                        <span class="param-suggest">💡 Tránh rủi ro trong giai đoạn thị trường hỗn loạn. Mặc định: <strong>180 phút</strong> (3 giờ)</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="luu-y">
-            <h2>⚠️ Lưu Ý & Gợi Ý</h2>
+            <h2>📋 Lưu Ý & Gợi Ý</h2>
             <ul>
-                <li><strong>Backtest trước:</strong> Chạy Strategy Tester trên MT5 với dữ liệu chất lượng cao (99% modeling). Thời gian test: 1-3 tháng gần nhất. So sánh với các EA khác để thấy sự vượt trội của TURBO.</li>
-                <li><strong>Vốn tối thiểu:</strong> $1000 cho lot 0.01. Không dùng >2% vốn/lệnh. Bắt đầu với demo account 1 tuần để làm quen với hành vi bot.</li>
-                <li><strong>Broker khuyến nghị:</strong> ECN/STP với spread thấp, không requote. Kích hoạt Algo Trading trong MT5. Ưu tiên broker hỗ trợ VPS để chạy 24/7 không gián đoạn.</li>
-                <li><strong>Rủi ro:</strong> Bot có cắt lỗ toàn bộ, nhưng không đảm bảo lợi nhuận. Theo dõi hàng ngày, tránh over-optimize. Kết hợp với phân tích cơ bản để tăng độ chính xác.</li>
-                <li><strong>Cập nhật:</strong> Bot có license check (60 ngày trial). Liên hệ admin để renew. Theo dõi Telegram group để cập nhật phiên bản mới và tối ưu hóa.</li>
-                <li><strong>Tối ưu hóa:</strong> Sử dụng công cụ MT5 Optimizer để tinh chỉnh step_min và ProfitPerLot dựa trên cặp tiền cụ thể. Tránh chạy trên nhiều chart cùng lúc để giảm tải server.</li>
-                <li><strong>Theo dõi:</strong> Kiểm tra log MT5 hàng tuần để phát hiện slippage hoặc lỗi. Sử dụng mobile app MT5 để nhận alert P/L realtime.</li>
+                <li><strong>Backtest trước:</strong> Chạy Strategy Tester trên MT5 với dữ liệu lịch sử.</li>
+                <li><strong>Theo dõi hàng ngày:</strong> Tránh các rủi ro đến từ sàn giao dịch, kết nối VPS, tình trạng thanh khoản thị trường yếu vào các ngày lễ, hoặc thời điểm ra tin tức lớn.</li>
+                <li><strong>Theo dõi Telegram Group:</strong> Cập nhật phiên bản mới và giao lưu cùng anh chị em trader khác: <a href="https://t.me/TCode_TradingHeBot" target="_blank">https://t.me/TCode_TradingHeBot</a></li>
+                <li><strong>Liên hệ trực tiếp Admin TCode:</strong> Xem thông tin bên dưới để hỗ trợ kỹ thuật.</li>
             </ul>
+        </section>
+
+        <section id="canh-bao">
+            <h2>⚠️ Cảnh Báo</h2>
             <div class="warning">
-                <strong>⚠️ Cảnh báo:</strong> Giao dịch forex có rủi ro cao, có thể dẫn đến mất toàn bộ vốn đầu tư. TURBO Infinity là công cụ hỗ trợ, không phải "máy in tiền" đảm bảo. Không sử dụng nếu bạn không hiểu rõ rủi ro liên quan đến đòn bẩy, biến động thị trường, và slippage. Chúng tôi (TCode FX) không chịu trách nhiệm cho bất kỳ tổn thất tài chính nào phát sinh từ việc sử dụng bot này. Đây không phải là lời khuyên tài chính, đầu tư, hoặc khuyến nghị. Hãy tham khảo ý kiến chuyên gia độc lập trước khi giao dịch. Bằng việc sử dụng, bạn đồng ý miễn trừ trách nhiệm cho nhà phát triển và nhà cung cấp. Thị trường có thể thay đổi đột ngột do sự kiện địa chính trị, và không công cụ nào có thể dự đoán 100%.
+                <p>
+                    <strong>Giao dịch CFD có rủi ro cao, có thể dẫn đến mất toàn bộ vốn đầu tư.</strong>
+                </p>
+                <p>
+                    TURBO Infinity là công cụ hỗ trợ, không phải "chén thánh" đảm bảo lợi nhuận.
+                </p>
+                <p>
+                    Không sử dụng nếu bạn không hiểu rõ rủi ro liên quan đến đòn bẩy, biến động thị trường, và slippage.
+                </p>
+                <p>
+                    Tác giả không chịu trách nhiệm cho bất kỳ tổn thất tài chính nào phát sinh từ việc sử dụng bot này.
+                </p>
+                <p>
+                    Đây không phải là lời khuyên tài chính, đầu tư, hoặc khuyến nghị.
+                </p>
+                <p>
+                    Bằng việc sử dụng, bạn đồng ý miễn trừ trách nhiệm cho nhà phát triển và nhà cung cấp.
+                </p>
+                <p>
+                    Thị trường có thể thay đổi đột ngột do sự kiện địa chính trị, chính sách tài chính, các hiệu ứng thị trường và không công cụ nào có thể chiến thắng 100%.
+                </p>
             </div>
         </section>
 
@@ -303,27 +553,26 @@
                 Cảm ơn bạn đã sử dụng TURBO Infinity! Chúng tôi cam kết hỗ trợ 24/7.
             </p>
             <p class="emoji">
-                Tất cả Bot, Đăng ký tài khoản thông qua link đối tác để sử dụng <strong>MIỄN PHÍ</strong>:<br>
-                🌟 <strong>Sàn giao dịch: Vantage</strong><br>
-                🔹 <a href="https://vigco.co/la-com/vi/L2rDYca8" target="_blank">Link mở tài khoản</a><br>
-                🔹 Mã đối tác: L2rDYca8
+                Tất cả Bot, đăng ký tài khoản thông qua link đối tác để sử dụng <strong>MIỄN PHÍ</strong>:<br>
+                🏦 <strong>Sàn giao dịch: Vantage</strong><br>
+                🔗 <a href="https://vigco.co/la-com/vi/L2rDYca8" target="_blank">Link mở tài khoản</a><br>
+                🎯 Mã đối tác: L2rDYca8
             </p>
             <p class="emoji">
                 <strong>LH Admin TCode:</strong><br>
-                📞 Zalo: <a href="https://zalo.me/0964822327" target="_blank">0964.822.327</a><br>
-                ✉️ Gmail: <a href="mailto:tcodefx.auto@gmail.com">tcodefx.auto@gmail.com</a><br>
-                🌐 Telegram: <a href="https://t.me/tCode_T95" target="_blank">t.me/tCode_T95</a>
+                📱 Zalo: <a href="https://zalo.me/0964822327" target="_blank">0964.822.327</a><br>
+                📧 Gmail: <a href="mailto:tcodefx.auto@gmail.com">tcodefx.auto@gmail.com</a><br>
+                💬 Telegram: <a href="https://t.me/tCode_T95" target="_blank">t.me/tCode_T95</a>
             </p>
             <p><em>"Giao dịch thông minh, lợi nhuận bền vững!"</em></p>
         </section>
     </div>
 
     <footer>
-        <p>&copy; 2025 TCode FX. Tất cả quyền được bảo lưu. Phiên bản hướng dẫn: 1.0</p>
+        <p>&copy; 2025 TCode FX. Tất cả quyền được bảo lưu. Phiên bản hướng dẫn: 1.1</p>
     </footer>
 
     <script>
-        // JS đơn giản cho smooth scroll (nếu cần menu)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
