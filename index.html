@@ -3,281 +3,459 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hướng Dẫn Sử Dụng Bot TURBO Infinity - EA MT5</title>
+    <title>Giới Thiệu TURBO Infinity - EA MT5</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-            color: #333;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a1f2e 50%, #16213e 100%);
+            color: #e0e6ed;
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
         header {
             text-align: center;
-            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(255,255,255,0.15) 100%);
-            padding: 50px 30px;
-            border-radius: 20px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,215,0,0.3);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 100%);
+            padding: 80px 30px;
+            border-radius: 25px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
             position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         header p {
-            color: rgba(255,255,255,0.95);
-            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2em;
             font-weight: 300;
             letter-spacing: 0.5px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .lang-switcher {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 20px;
+            right: 20px;
             display: flex;
-            gap: 5px;
-            background: rgba(255,215,0,0.1);
-            padding: 5px;
-            border-radius: 15px;
-            border: 1px solid rgba(255,215,0,0.2);
+            gap: 8px;
+            background: rgba(0, 123, 255, 0.1);
+            padding: 8px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 123, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .lang-switcher:hover {
+            background: rgba(0, 123, 255, 0.2);
         }
         .lang-btn {
-            padding: 4px 8px;
+            padding: 6px 12px;
             background: transparent;
-            color: #ffd700;
+            color: #007bff;
             border: none;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
-            font-size: 0.8em;
+            font-size: 0.85em;
             font-weight: 500;
             transition: all 0.3s ease;
             white-space: nowrap;
         }
         .lang-btn:hover, .lang-btn.active {
-            background: #ffd700;
-            color: #0f2027;
+            background: #007bff;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
         }
         h1 {
-            color: #ffd700;
-            font-size: 3em;
-            margin-bottom: 15px;
-            text-shadow: 0 0 20px rgba(255,215,0,0.5), 2px 2px 4px rgba(0,0,0,0.5);
+            color: #007bff;
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(0, 123, 255, 0.4), 2px 2px 6px rgba(0, 0, 0, 0.5);
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 30px rgba(0, 123, 255, 0.4), 2px 2px 6px rgba(0, 0, 0, 0.5); }
+            to { text-shadow: 0 0 40px rgba(0, 123, 255, 0.6), 2px 2px 6px rgba(0, 0, 0, 0.5); }
         }
         h2 {
-            color: #2c5364;
-            border-bottom: 3px solid #ffd700;
-            padding-bottom: 12px;
+            color: #007bff;
+            border-bottom: 4px solid #007bff;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #007bff, #00c6ff);
+            border-radius: 2px;
+        }
+        section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            margin: 30px 0;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 123, 255, 0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-out;
+            transition: all 0.3s ease;
+        }
+        section:hover {
+            box-shadow: 0 20px 60px rgba(0, 123, 255, 0.1);
+            border-color: rgba(0, 123, 255, 0.2);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        section h3 {
+            color: #007bff;
+            font-size: 1.4em;
+            margin-top: 0;
             margin-bottom: 20px;
             font-weight: 600;
         }
-        section {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            margin: 25px 0;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            border: 1px solid rgba(255,215,0,0.1);
-        }
-        section h3 {
-            color: #2c5364;
-            font-size: 1.3em;
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
         section p {
-            color: #2c3e50;
-            line-height: 1.8;
+            color: #b8c1d4;
+            line-height: 1.9;
         }
-        .param-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            border-radius: 10px;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .feature-card {
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.05) 0%, rgba(0, 198, 255, 0.03) 100%);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            position: relative;
             overflow: hidden;
         }
-        .param-table th, .param-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #e8e8e8;
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.1), transparent);
+            transition: left 0.5s;
         }
-        .param-table th {
-            background: linear-gradient(135deg, #2c5364 0%, #0f2027 100%);
-            color: #ffd700;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9em;
-            letter-spacing: 0.5px;
+        .feature-card:hover::before {
+            left: 100%;
         }
-        .param-table td {
-            color: #2c3e50;
-            background: #fff;
+        .feature-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 60px rgba(0, 123, 255, 0.15);
+            border-color: rgba(0, 123, 255, 0.4);
         }
-        .param-table tr:hover td {
-            background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
-            transition: all 0.3s ease;
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            display: block;
+            transition: transform 0.3s ease;
         }
-        .tip {
-            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
-            padding: 20px;
-            border-left: 5px solid #4caf50;
-            margin: 15px 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(76,175,80,0.2);
-            color: #2c3e50;
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(360deg);
         }
-        .tip strong {
-            color: #2e7d32;
-        }
-        .warning {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
-            padding: 20px;
-            border-left: 5px solid #ff9800;
-            margin: 15px 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(255,152,0,0.2);
-            color: #2c3e50;
-        }
-        .warning strong {
-            color: #e65100;
-        }
-        .warning p {
-            margin: 8px 0;
-            line-height: 1.7;
-        }
-        .author-section {
-            text-align: center;
-            background: linear-gradient(135deg, #2c5364 0%, #0f2027 100%);
-            color: #fff;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,215,0,0.2);
-        }
-        .author-section h2 {
-            color: #ffd700;
-            border-bottom: 3px solid #ffd700;
-            display: inline-block;
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-        }
-        .author-section p {
-            color: rgba(255,255,255,0.95);
-            line-height: 1.8;
-            margin: 15px 0;
-        }
-        .author-section a {
-            color: #ffd700;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .author-section a:hover {
-            color: #ffed4e;
-            text-shadow: 0 0 10px rgba(255,215,0,0.5);
-        }
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: rgba(255,255,255,0.8);
-            font-size: 0.95em;
-            margin-top: 30px;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        ul li {
-            margin: 12px 0;
-            color: #2c3e50;
-            line-height: 1.7;
-        }
-        ul li strong {
-            color: #2c5364;
-        }
-        /* Styles cho param groups */
+        /* Styles cho param groups - Điều chỉnh cho theme mới */
         .param-group {
             margin: 30px 0;
-            border: 2px solid #e8e8e8;
+            border: 2px solid rgba(0, 123, 255, 0.2);
             border-radius: 15px;
             overflow: hidden;
-            background: #fff;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .param-group:hover {
+            border-color: rgba(0, 123, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.1);
         }
         .param-group-header {
-            background: linear-gradient(135deg, #2c5364 0%, #0f2027 100%);
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
             color: #fff;
             padding: 20px 25px;
             display: flex;
             align-items: center;
             gap: 15px;
+            transition: all 0.3s ease;
+        }
+        .param-group-header:hover {
+            background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
         }
         .param-group-header h3 {
             margin: 0;
-            color: #ffd700;
+            color: #fff;
             font-size: 1.3em;
             font-weight: 600;
         }
         .group-icon {
             font-size: 1.8em;
+            transition: transform 0.3s ease;
+        }
+        .param-group:hover .group-icon {
+            transform: scale(1.2);
         }
         .advanced-badge {
             margin-left: auto;
-            background: rgba(255,215,0,0.2);
-            color: #ffd700;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
             padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.75em;
             font-weight: 600;
-            border: 1px solid rgba(255,215,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .advanced-badge:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
         .param-item {
             padding: 20px 25px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid rgba(0, 123, 255, 0.1);
             transition: all 0.3s ease;
+            color: #b8c1d4;
+            cursor: pointer;
         }
         .param-item:last-child {
             border-bottom: none;
         }
         .param-item:hover {
-            background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+            background: rgba(0, 123, 255, 0.05);
             padding-left: 30px;
+            box-shadow: inset 0 0 10px rgba(0, 123, 255, 0.1);
         }
         .param-name {
             font-weight: 600;
-            color: #2c5364;
+            color: #007bff;
             font-size: 1.1em;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
+            transition: color 0.3s ease;
+        }
+        .param-item:hover .param-name {
+            color: #00c6ff;
         }
         .param-name::before {
             content: "▸";
-            color: #ffd700;
+            color: #00c6ff;
             margin-right: 10px;
             font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        .param-item:hover .param-name::before {
+            transform: scale(1.5);
         }
         .param-description {
-            color: #555;
+            color: #b8c1d4;
             line-height: 1.7;
             padding-left: 20px;
+            transition: color 0.3s ease;
+        }
+        .param-item:hover .param-description {
+            color: #e0e6ed;
         }
         .param-suggest {
             display: inline-block;
             margin-top: 8px;
             padding: 8px 12px;
-            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
-            border-left: 3px solid #4caf50;
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+            border-left: 3px solid #28a745;
             border-radius: 5px;
             font-size: 0.95em;
-            color: #2e7d32;
+            color: #28a745;
+            transition: all 0.3s ease;
+        }
+        .param-suggest:hover {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.2) 0%, rgba(76, 175, 80, 0.1) 100%);
+            border-left-width: 5px;
+        }
+        .tip {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+            padding: 25px;
+            border-left: 5px solid #28a745;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(40, 167, 69, 0.1);
+            color: #b8c1d4;
+            transition: all 0.3s ease;
+        }
+        .tip:hover {
+            border-left-width: 8px;
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.15);
+        }
+        .tip strong {
+            color: #28a745;
+        }
+        .warning {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.05) 100%);
+            padding: 25px;
+            border-left: 5px solid #ffc107;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(255, 193, 7, 0.1);
+            color: #b8c1d4;
+            transition: all 0.3s ease;
+        }
+        .warning:hover {
+            border-left-width: 8px;
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.15);
+        }
+        .warning strong {
+            color: #ffc107;
+        }
+        .author-section {
+            text-align: center;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a1f2e 100%);
+            color: #e0e6ed;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            margin-top: 50px;
+            transition: all 0.3s ease;
+        }
+        .author-section:hover {
+            box-shadow: 0 20px 60px rgba(0, 123, 255, 0.1);
+        }
+        .author-section h2 {
+            color: #007bff;
+            border-bottom: 4px solid #007bff;
+            display: inline-block;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        .author-section p {
+            color: rgba(224, 230, 237, 0.9);
+            line-height: 1.9;
+            margin: 20px 0;
+        }
+        .author-section a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+        .author-section a:hover {
+            color: #00c6ff;
+            border-bottom-color: #00c6ff;
+            text-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+            transform: scale(1.05);
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(224, 230, 237, 0.7);
+            font-size: 0.95em;
+            margin-top: 50px;
+            border-top: 1px solid rgba(0, 123, 255, 0.1);
+        }
+        ul {
+            padding-left: 25px;
+        }
+        ul li {
+            margin: 15px 0;
+            color: #b8c1d4;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        ul li::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 0;
+            width: 8px;
+            height: 8px;
+            background: #007bff;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        ul li:hover {
+            color: #e0e6ed;
+        }
+        ul li:hover::before {
+            background: #00c6ff;
+            transform: scale(1.5);
+        }
+        ul li strong {
+            color: #007bff;
+        }
+        .cta-button {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 123, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.4);
         }
         .content-en {
             display: none;
@@ -291,43 +469,37 @@
         body.lang-en .content-vi {
             display: none;
         }
-        body.lang-en {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body.lang-en h1, body.lang-en h2, body.lang-en h3 {
-            font-weight: 600;
-        }
         @media (max-width: 768px) {
-            .param-table {
-                font-size: 0.85em;
-            }
-            .param-table th, .param-table td {
-                padding: 10px;
-            }
             h1 {
-                font-size: 2em;
+                font-size: 2.5em;
             }
             header {
-                padding: 30px 20px;
+                padding: 50px 20px;
             }
             section {
-                padding: 25px;
+                padding: 30px 20px;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
             }
             .lang-switcher {
-                top: 10px;
-                right: 10px;
-                flex-direction: row;
-                gap: 3px;
-                padding: 3px;
+                top: 15px;
+                right: 15px;
+                gap: 5px;
+                padding: 5px;
             }
             .lang-btn {
-                padding: 3px 6px;
-                font-size: 0.75em;
+                padding: 4px 8px;
+                font-size: 0.8em;
+            }
+            .param-item:hover {
+                padding-left: 25px;
             }
         }
     </style>
 </head>
 <body class="lang-vi">
+    <canvas id="particles-canvas"></canvas>
     <div class="container">
         <header>
             <div class="lang-switcher">
@@ -336,43 +508,59 @@
             </div>
             <h1 class="content-vi">♾️ TURBO Infinity - EA MT5</h1>
             <h1 class="content-en">♾️ TURBO Infinity - EA MT5</h1>
-            <p class="content-vi">Giải pháp giao dịch tự động dựa trên Cân bằng động thời gian thực</p>
-            <p class="content-en">Automated Trading Solution Based on Real-Time Dynamic Balance</p>
+            <p class="content-vi">Giải pháp giao dịch tự động tiên tiến dựa trên Cân bằng động thời gian thực</p>
+            <p class="content-en">Advanced Automated Trading Solution Based on Real-Time Dynamic Balance</p>
         </header>
         <section id="gioi-thieu">
-            <h2 class="content-vi content-en">📌 Introduction</h2>
-            <h3 class="content-vi">TURBO Infinity – EA giao dịch dựa trên Cân Bằng Động realtime</h3>
-            <h3 class="content-en">TURBO Infinity – Real-Time Dynamic Balance Trading EA</h3>
+            <h2 class="content-vi content-en">📌 Giới Thiệu TURBO Infinity</h2>
             <p class="content-vi">
-                <strong>TURBO Infinity</strong> là EA MT5 vận hành theo cơ chế Cân Bằng Động, liên tục điều chỉnh Buy – Sell theo biến động thực tế. Hệ thống sử dụng Liquidity Pool Balancer để tự động cân đối lot, cập nhật Target BE và tối ưu PnL, hạn chế lệch vị thế khi thị trường đổi trạng thái.
+                <strong>TURBO Infinity</strong> là Expert Advisor (EA) hàng đầu cho MetaTrader 5, được thiết kế để tối ưu hóa giao dịch tự động trên thị trường tài chính. Với cơ chế Cân Bằng Động tiên tiến, EA liên tục điều chỉnh vị thế Buy – Sell dựa trên biến động thị trường thực tế, đảm bảo sự cân bằng và giảm thiểu rủi ro.
             </p>
             <p class="content-en">
-                <strong>TURBO Infinity</strong> is an MT5 EA operating on a Dynamic Balance mechanism, continuously adjusting Buy – Sell positions based on real-time market fluctuations. The system uses Liquidity Pool Balancer to automatically balance lots, update Target BE, and optimize PnL, minimizing position imbalances when the market changes state.
+                <strong>TURBO Infinity</strong> is a leading Expert Advisor (EA) for MetaTrader 5, designed to optimize automated trading in financial markets. With an advanced Dynamic Balance mechanism, the EA continuously adjusts Buy – Sell positions based on real-time market fluctuations, ensuring balance and minimizing risk.
             </p>
             <p class="content-vi">
-                EA bám sát biên độ dao động realtime để quyết định điểm vào/thoát, phân bổ khoảng cách lệnh hợp lý, tăng/giảm lot và điều chỉnh mục tiêu lợi nhuận theo điều kiện thị trường.
+                Sử dụng Liquidity Pool Balancer, TURBO Infinity tự động cân đối lot size, cập nhật mục tiêu Breakeven (BE), và tối ưu hóa Profit and Loss (PnL). EA bám sát biên độ dao động thời gian thực để quyết định điểm vào lệnh và thoát lệnh, phân bổ khoảng cách lệnh một cách thông minh, đồng thời điều chỉnh lot và mục tiêu lợi nhuận phù hợp với điều kiện thị trường.
             </p>
             <p class="content-en">
-                The EA closely tracks real-time oscillation ranges to decide entry/exit points, allocate reasonable order spacing, increase/decrease lots, and adjust profit targets based on market conditions.
+                Utilizing Liquidity Pool Balancer, TURBO Infinity automatically balances lot sizes, updates Breakeven (BE) targets, and optimizes Profit and Loss (PnL). The EA tracks real-time oscillation ranges to determine entry and exit points, intelligently allocates order spacing, and adjusts lots and profit targets according to market conditions.
             </p>
-            <p class="content-vi">
-                TURBO Infinity thuộc nhóm EA giao dịch nhanh, ưu tiên vòng quay vốn và khả năng thu hồi vốn sớm. Đổi lại, hiệu suất cao đi kèm rủi ro lớn.
-            </p>
-            <p class="content-en">
-                TURBO Infinity belongs to the group of fast-trading EAs, prioritizing capital turnover and early capital recovery. In return, high performance comes with significant risks.
-            </p>
-            <div class="tip">
-                <strong class="content-vi">💡 Gợi ý nhanh:</strong>
-                <strong class="content-en">💡 Quick Tips:</strong><br>
-                <span class="content-vi">• Nên chạy trên tài khoản Cent để giảm rủi ro.<br>• Vốn tối thiểu đề xuất: 30.000 Cent (tương đương ~300 USD khi chuyển sang tài khoản Cent).<br>• Cặp giao dịch: XAUUSD.<br>• Kết quả chạy real 1 tháng: khoảng 5% – 20%/ngày tùy điều kiện thị trường và cấu hình.<br>• Backtest: có thể đạt 200% – 500%/tháng, nhưng kết quả quá khứ không đảm bảo lợi nhuận trong tương lai.</span>
-                <span class="content-en">• Recommended to run on a Cent account to reduce risk.<br>• Minimum suggested capital: 30,000 Cent (equivalent to ~$300 on a Cent account).<br>• Trading pair: XAUUSD.<br>• Real run results for 1 month: approximately 5% – 20%/day depending on market conditions and configuration.<br>• Backtest: can achieve 200% – 500%/month, but past results do not guarantee future profits.</span>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3 class="content-vi">Tốc Độ Cao</h3>
+                    <h3 class="content-en">High Speed</h3>
+                    <p class="content-vi">Ưu tiên vòng quay vốn nhanh chóng, thu hồi vốn sớm với hiệu suất vượt trội.</p>
+                    <p class="content-en">Prioritizes rapid capital turnover and early recovery with superior performance.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🛡️</span>
+                    <h3 class="content-vi">Quản Lý Rủi Ro Thông Minh</h3>
+                    <h3 class="content-en">Smart Risk Management</h3>
+                    <p class="content-vi">Tự động tạm dừng và cắt lỗ để bảo vệ tài khoản trong điều kiện thị trường biến động.</p>
+                    <p class="content-en">Automatically pauses and stops losses to protect accounts during volatile markets.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h3 class="content-vi">Phân Tích Thời Gian Thực</h3>
+                    <h3 class="content-en">Real-Time Analysis</h3>
+                    <p class="content-vi">Theo dõi spread, tốc độ giá và đột biến nến để giao dịch an toàn hơn.</p>
+                    <p class="content-en">Monitors spreads, price speed, and candle spikes for safer trading.</p>
+                </div>
             </div>
+            <div class="tip">
+                <strong class="content-vi">💡 Lợi Ích Chính:</strong>
+                <strong class="content-en">💡 Key Benefits:</strong><br>
+                <span class="content-vi">• Kết quả thực tế: 5% – 20%/ngày trên XAUUSD.<br>• Backtest: Lên đến 200% – 500%/tháng (kết quả quá khứ không đảm bảo tương lai).<br>• Vốn tối thiểu: 30.000 Cent (~300 USD).<br>• Hỗ trợ đa khung giờ và cặp tiền tệ chính.</span>
+                <span class="content-en">• Real results: 5% – 20%/day on XAUUSD.<br>• Backtest: Up to 200% – 500%/month (past results do not guarantee future).<br>• Minimum capital: 30,000 Cent (~$300).<br>• Supports multiple timeframes and major pairs.</span>
+            </div>
+            <a href="#huong-dan" class="cta-button content-vi content-en">Hướng Dẫn Cài Đặt / Setup Guide</a>
         </section>
         <section id="huong-dan">
             <h2 class="content-vi">⚙️ Hướng Dẫn Cài Đặt Thông Số</h2>
             <h2 class="content-en">⚙️ Parameter Setup Guide</h2>
-            <p style="text-align: center; font-size: 1.05em; color: #555; margin-bottom: 30px;" class="content-vi">Hướng dẫn chi tiết cài đặt các thông số cho người mới bắt đầu.</p>
-            <p style="text-align: center; font-size: 1.05em; color: #555; margin-bottom: 30px;" class="content-en">Detailed setup guide for beginners.</p>
+            <p style="text-align: center; font-size: 1.05em; color: #b8c1d4; margin-bottom: 30px;" class="content-vi">Hướng dẫn chi tiết cài đặt các thông số cho người mới bắt đầu.</p>
+            <p style="text-align: center; font-size: 1.05em; color: #b8c1d4; margin-bottom: 30px;" class="content-en">Detailed setup guide for beginners.</p>
             <!-- Nhóm 1: Cài đặt cơ bản -->
             <div class="param-group">
                 <div class="param-group-header">
@@ -380,7 +568,7 @@
                     <h3 class="content-vi">CÀI ĐẶT CƠ BẢN</h3>
                     <h3 class="content-en">BASIC SETTINGS</h3>
                 </div>
-               
+              
                 <div class="param-item">
                     <div class="param-name content-vi">Ngôn ngữ Dashboard hiển thị</div>
                     <div class="param-name content-en">Dashboard Display Language</div>
@@ -665,101 +853,75 @@
             </div>
         </section>
         <section id="luu-y">
-            <h2 class="content-vi">📋 Lưu Ý & Gợi Ý</h2>
-            <h2 class="content-en">📋 Notes & Suggestions</h2>
+            <h2 class="content-vi">📋 Lưu Ý Quan Trọng</h2>
+            <h2 class="content-en">📋 Important Notes</h2>
             <ul class="content-vi">
-                <li><strong>Backtest trước:</strong> Chạy Strategy Tester trên MT5 với dữ liệu lịch sử.</li>
-                <li><strong>Theo dõi hàng ngày:</strong> Tránh các rủi ro đến từ sàn giao dịch, kết nối VPS, tình trạng thanh khoản thị trường yếu vào các ngày lễ, hoặc thời điểm ra tin tức lớn.</li>
-                <li><strong>Theo dõi Telegram Group:</strong> Cập nhật phiên bản mới và giao lưu cùng anh chị em trader khác: <a href="https://t.me/TCode_TradingHeBot" target="_blank">https://t.me/TCode_TradingHeBot</a></li>
-                <li><strong>Liên hệ trực tiếp Admin TCode:</strong> Xem thông tin bên dưới để hỗ trợ kỹ thuật.</li>
+                <li><strong>Backtest trước khi sử dụng:</strong> Kiểm tra trên Strategy Tester với dữ liệu lịch sử để hiểu hành vi EA.</li>
+                <li><strong>Theo dõi hàng ngày:</strong> Giám sát kết nối VPS, thanh khoản thị trường và tránh giao dịch trong tin tức lớn.</li>
+                <li><strong>Cộng đồng hỗ trợ:</strong> Tham gia Telegram Group để cập nhật phiên bản mới và chia sẻ kinh nghiệm: <a href="https://t.me/TCode_TradingHeBot" target="_blank">https://t.me/TCode_TradingHeBot</a></li>
             </ul>
             <ul class="content-en">
-                <li><strong>Backtest first:</strong> Run Strategy Tester on MT5 with historical data.</li>
-                <li><strong>Daily monitoring:</strong> Avoid risks from brokers, VPS connections, low market liquidity during holidays, or major news releases.</li>
-                <li><strong>Follow Telegram Group:</strong> For new version updates and community interaction: <a href="https://t.me/TCode_TradingHeBot" target="_blank">https://t.me/TCode_TradingHeBot</a></li>
-                <li><strong>Contact Admin TCode directly:</strong> See details below for technical support.</li>
+                <li><strong>Backtest before use:</strong> Test on Strategy Tester with historical data to understand EA behavior.</li>
+                <li><strong>Daily monitoring:</strong> Monitor VPS connections, market liquidity, and avoid trading during major news.</li>
+                <li><strong>Community support:</strong> Join Telegram Group for new version updates and experience sharing: <a href="https://t.me/TCode_TradingHeBot" target="_blank">https://t.me/TCode_TradingHeBot</a></li>
             </ul>
         </section>
         <section id="canh-bao">
-            <h2 class="content-vi content-en">⚠️ Warning</h2>
+            <h2 class="content-vi content-en">⚠️ Cảnh Báo Rủi Ro</h2>
             <div class="warning">
                 <p class="content-vi">
-                    <strong>Giao dịch CFD có rủi ro cao, có thể dẫn đến mất toàn bộ vốn đầu tư.</strong>
+                    <strong>Giao dịch tự động với đòn bẩy cao có thể dẫn đến mất toàn bộ vốn.</strong>
                 </p>
                 <p class="content-en">
-                    <strong>CFD trading carries high risk and may lead to loss of entire investment capital.</strong>
+                    <strong>Automated trading with high leverage can result in total capital loss.</strong>
                 </p>
                 <p class="content-vi">
-                    TURBO Infinity là công cụ hỗ trợ, không phải "chén thánh" đảm bảo lợi nhuận.
+                    TURBO Infinity là công cụ hỗ trợ giao dịch, không đảm bảo lợi nhuận. Hãy hiểu rõ rủi ro trước khi sử dụng.
                 </p>
                 <p class="content-en">
-                    TURBO Infinity is a support tool, not a "holy grail" guaranteeing profits.
+                    TURBO Infinity is a trading support tool, not a guarantee of profits. Understand the risks fully before use.
                 </p>
                 <p class="content-vi">
-                    Không sử dụng nếu bạn không hiểu rõ rủi ro liên quan đến đòn bẩy, biến động thị trường, và slippage.
+                    Tác giả không chịu trách nhiệm cho bất kỳ tổn thất nào. Đây không phải lời khuyên tài chính.
                 </p>
                 <p class="content-en">
-                    Do not use if you do not fully understand risks related to leverage, market volatility, and slippage.
-                </p>
-                <p class="content-vi">
-                    Tác giả không chịu trách nhiệm cho bất kỳ tổn thất tài chính nào phát sinh từ việc sử dụng bot này.
-                </p>
-                <p class="content-en">
-                    The author is not responsible for any financial losses arising from using this bot.
-                </p>
-                <p class="content-vi">
-                    Đây không phải là lời khuyên tài chính, đầu tư, hoặc khuyến nghị.
-                </p>
-                <p class="content-en">
-                    This is not financial, investment, or advisory advice.
-                </p>
-                <p class="content-vi">
-                    Bằng việc sử dụng, bạn đồng ý miễn trừ trách nhiệm cho nhà phát triển và nhà cung cấp.
-                </p>
-                <p class="content-en">
-                    By using, you agree to disclaim liability for the developer and provider.
-                </p>
-                <p class="content-vi">
-                    Thị trường có thể thay đổi đột ngột do sự kiện địa chính trị, chính sách tài chính, các hiệu ứng thị trường và không công cụ nào có thể chiến thắng 100%.
-                </p>
-                <p class="content-en">
-                    Markets can change abruptly due to geopolitical events, financial policies, market effects, and no tool can win 100%.
+                    The author is not liable for any losses. This is not financial advice.
                 </p>
             </div>
         </section>
         <section id="tac-gia" class="author-section">
-            <h2 class="content-vi content-en">👨‍💻 Author & Message</h2>
+            <h2 class="content-vi content-en">👨‍💻 Nhà Phát Triển & Thông Tin</h2>
             <p class="content-vi">
-                Bot được phát triển bởi <strong>Mr.TCode™</strong> - Lập trình viên chuyên phát triển EA MT4/MT5.
+                TURBO Infinity được phát triển bởi <strong>Mr.TCode™</strong> - Chuyên gia lập trình EA MT4/MT5 với hơn 5 năm kinh nghiệm.
             </p>
             <p class="content-en">
-                Bot developed by <strong>Mr.TCode™</strong> - Expert programmer in MT4/MT5 EA development.
+                TURBO Infinity developed by <strong>Mr.TCode™</strong> - Expert in MT4/MT5 EA programming with over 5 years of experience.
             </p>
-            <p class="emoji content-vi">
-                Đăng ký tài khoản giao dịch thông qua link đối tác để sử dụng <strong>MIỄN PHÍ tất cả các bot trong hệ sinh thái TCode™</strong>:<br>
-                🏦 <strong>Sàn giao dịch: Vantage</strong><br>
-                🔗 <a href="https://vigco.co/la-com/vi/L2rDYca8" target="_blank">Link mở tài khoản: https://vigco.co/la-com/vi/L2rDYca8</a><br>
+            <p class="content-vi">
+                Đăng ký tài khoản qua link đối tác để sử dụng <strong>MIỄN PHÍ tất cả bot trong hệ sinh thái TCode™</strong>:<br>
+                🏦 <strong>Sàn: Vantage</strong><br>
+                🔗 <a href="https://vigco.co/la-com/vi/L2rDYca8" target="_blank">Link mở tài khoản</a><br>
                 🎯 Mã đối tác: L2rDYca8
             </p>
-            <p class="emoji content-en">
-                Register a trading account via partner link to use <strong>ALL bots in the TCode™ ecosystem FOR FREE</strong>:<br>
+            <p class="content-en">
+                Register via partner link to use <strong>ALL bots in TCode™ ecosystem FOR FREE</strong>:<br>
                 🏦 <strong>Broker: Vantage</strong><br>
-                🔗 <a href="https://vigco.co/la-com/vi/L2rDYca8" target="_blank">Account Opening Link: https://vigco.co/la-com/vi/L2rDYca8</a><br>
+                🔗 <a href="https://vigco.co/la-com/vi/L2rDYca8" target="_blank">Account Opening Link</a><br>
                 🎯 Partner Code: L2rDYca8
             </p>
-            <p class="emoji">
-                <strong class="content-vi">Liên hệ Admin TCode:</strong>
-                <strong class="content-en">Contact Admin TCode:</strong><br>
+            <p>
+                <strong class="content-vi">Liên hệ hỗ trợ:</strong>
+                <strong class="content-en">Contact Support:</strong><br>
                 📱 Zalo: <a href="https://zalo.me/0964822327" target="_blank">0964.822.327</a><br>
-                📧 Gmail: <a href="mailto:tcodefx.auto@gmail.com">tcodefx.auto@gmail.com</a><br>
+                📧 Email: <a href="mailto:tcodefx.auto@gmail.com">tcodefx.auto@gmail.com</a><br>
                 💬 Telegram: <a href="https://t.me/tCode_T95" target="_blank">t.me/tCode_T95</a>
             </p>
-            <p class="content-vi"><em>"Cực tĩnh sinh động, cực động sinh tĩnh!"</em></p>
-            <p class="content-en"><em>"Extreme stillness gives rise to movement, extreme movement gives rise to stillness!"</em></p>
+            <p class="content-vi"><em>"Cân bằng là chìa khóa của sự thịnh vượng trong giao dịch!"</em></p>
+            <p class="content-en"><em>"Balance is the key to prosperity in trading!"</em></p>
         </section>
     </div>
     <footer>
-        <p>&copy; 2025 Mr.TCode™. All rights reserved. Guide version: 1.1</p>
+        <p>&copy; 2025 Mr.TCode™. All rights reserved. Phiên bản giới thiệu: 1.1</p>
     </footer>
     <script>
         function switchLang(lang) {
@@ -776,6 +938,74 @@
                 });
             });
         });
+
+        // Hiệu ứng nền node/blockchain
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        class Node {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 123, 255, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        const nodes = [];
+        for (let i = 0; i < 100; i++) {
+            nodes.push(new Node(Math.random() * canvas.width, Math.random() * canvas.height));
+        }
+
+        function connectNodes() {
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = `rgba(0, 123, 255, ${1 - distance / 100})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            nodes.forEach(node => {
+                node.update();
+                node.draw();
+            });
+            connectNodes();
+            requestAnimationFrame(animate);
+        }
+        animate();
     </script>
 </body>
 </html>
