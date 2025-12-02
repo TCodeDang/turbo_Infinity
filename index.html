@@ -9,8 +9,8 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #0a0e17 0%, #1a1f2e 50%, #16213e 100%);
-            color: #e0e6ed;
+            background: linear-gradient(135deg, #0f1419 0%, #1e293b 50%, #334155 100%);
+            color: #e2e8f0;
             line-height: 1.7;
             overflow-x: hidden;
             position: relative;
@@ -22,7 +22,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.6;
+            opacity: 0.3;
         }
         .container {
             max-width: 1200px;
@@ -33,29 +33,29 @@
         }
         header {
             text-align: center;
-            background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 100%);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(255, 255, 255, 0.05) 100%);
             padding: 80px 30px;
             border-radius: 25px;
             margin-bottom: 50px;
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 123, 255, 0.2);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             position: relative;
-            animation: fadeInDown 1s ease-out;
+            animation: fadeInDown 1.2s ease-out;
         }
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
+            from { opacity: 0; transform: translateY(-40px); }
             to { opacity: 1; transform: translateY(0); }
         }
         header p {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.85);
             font-size: 1.2em;
             font-weight: 300;
             letter-spacing: 0.5px;
-            animation: fadeInUp 1s ease-out 0.3s both;
+            animation: fadeInUp 1.2s ease-out 0.4s both;
         }
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .lang-switcher {
@@ -64,19 +64,19 @@
             right: 20px;
             display: flex;
             gap: 8px;
-            background: rgba(0, 123, 255, 0.1);
+            background: rgba(59, 130, 246, 0.08);
             padding: 8px;
             border-radius: 20px;
-            border: 1px solid rgba(0, 123, 255, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.2);
             transition: all 0.3s ease;
         }
         .lang-switcher:hover {
-            background: rgba(0, 123, 255, 0.2);
+            background: rgba(59, 130, 246, 0.15);
         }
         .lang-btn {
             padding: 6px 12px;
             background: transparent;
-            color: #007bff;
+            color: #3b82f6;
             border: none;
             border-radius: 15px;
             cursor: pointer;
@@ -86,27 +86,27 @@
             white-space: nowrap;
         }
         .lang-btn:hover, .lang-btn.active {
-            background: #007bff;
+            background: #3b82f6;
             color: #fff;
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
         }
         h1 {
-            color: #007bff;
+            color: #3b82f6;
             font-size: 3.5em;
             margin-bottom: 20px;
-            text-shadow: 0 0 30px rgba(0, 123, 255, 0.4), 2px 2px 6px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 2px 2px 8px rgba(0, 0, 0, 0.4);
             font-weight: 700;
             letter-spacing: 1.5px;
-            animation: glow 2s ease-in-out infinite alternate;
+            animation: glow 3s ease-in-out infinite alternate;
         }
         @keyframes glow {
-            from { text-shadow: 0 0 30px rgba(0, 123, 255, 0.4), 2px 2px 6px rgba(0, 0, 0, 0.5); }
-            to { text-shadow: 0 0 40px rgba(0, 123, 255, 0.6), 2px 2px 6px rgba(0, 0, 0, 0.5); }
+            from { text-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 2px 2px 8px rgba(0, 0, 0, 0.4); }
+            to { text-shadow: 0 0 30px rgba(59, 130, 246, 0.5), 2px 2px 8px rgba(0, 0, 0, 0.4); }
         }
         h2 {
-            color: #007bff;
-            border-bottom: 4px solid #007bff;
+            color: #3b82f6;
+            border-bottom: 4px solid #3b82f6;
             padding-bottom: 15px;
             margin-bottom: 30px;
             font-weight: 600;
@@ -119,37 +119,38 @@
             left: 0;
             width: 50px;
             height: 3px;
-            background: linear-gradient(90deg, #007bff, #00c6ff);
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
             border-radius: 2px;
         }
         section {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
             margin: 30px 0;
             padding: 40px;
             border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(0, 123, 255, 0.1);
-            backdrop-filter: blur(10px);
-            animation: fadeIn 1s ease-out;
-            transition: all 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.08);
+            backdrop-filter: blur(15px);
+            animation: fadeIn 1.2s ease-out;
+            transition: all 0.4s ease;
         }
         section:hover {
-            box-shadow: 0 20px 60px rgba(0, 123, 255, 0.1);
-            border-color: rgba(0, 123, 255, 0.2);
+            box-shadow: 0 25px 70px rgba(59, 130, 246, 0.08);
+            border-color: rgba(59, 130, 246, 0.15);
+            transform: translateY(-2px);
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(25px); }
             to { opacity: 1; transform: translateY(0); }
         }
         section h3 {
-            color: #007bff;
+            color: #3b82f6;
             font-size: 1.4em;
             margin-top: 0;
             margin-bottom: 20px;
             font-weight: 600;
         }
         section p {
-            color: #b8c1d4;
+            color: #cbd5e1;
             line-height: 1.9;
         }
         .features-grid {
@@ -159,13 +160,13 @@
             margin: 40px 0;
         }
         .feature-card {
-            background: linear-gradient(135deg, rgba(0, 123, 255, 0.05) 0%, rgba(0, 198, 255, 0.03) 100%);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.04) 0%, rgba(96, 165, 250, 0.02) 100%);
             padding: 30px;
             border-radius: 20px;
-            border: 1px solid rgba(0, 123, 255, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.15);
             text-align: center;
             transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -177,51 +178,52 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.1), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.08), transparent);
+            transition: left 0.6s;
         }
         .feature-card:hover::before {
             left: 100%;
         }
         .feature-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 0 20px 60px rgba(0, 123, 255, 0.15);
-            border-color: rgba(0, 123, 255, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 70px rgba(59, 130, 246, 0.12);
+            border-color: rgba(59, 130, 246, 0.25);
         }
         .feature-icon {
             font-size: 3em;
             margin-bottom: 20px;
             display: block;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
         .feature-card:hover .feature-icon {
-            transform: scale(1.1) rotate(360deg);
+            transform: scale(1.1) rotate(10deg);
         }
         /* Styles cho param groups - Điều chỉnh cho theme mới */
         .param-group {
             margin: 30px 0;
-            border: 2px solid rgba(0, 123, 255, 0.2);
+            border: 2px solid rgba(59, 130, 246, 0.15);
             border-radius: 15px;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.03);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
         }
         .param-group:hover {
-            border-color: rgba(0, 123, 255, 0.4);
-            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.1);
+            border-color: rgba(59, 130, 246, 0.25);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.08);
         }
         .param-group-header {
-            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
             color: #fff;
             padding: 20px 25px;
             display: flex;
             align-items: center;
             gap: 15px;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         .param-group-header:hover {
-            background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+            background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+            transform: translateX(5px);
         }
         .param-group-header h3 {
             margin: 0;
@@ -231,175 +233,180 @@
         }
         .group-icon {
             font-size: 1.8em;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
         .param-group:hover .group-icon {
-            transform: scale(1.2);
+            transform: scale(1.15) rotate(5deg);
         }
         .advanced-badge {
             margin-left: auto;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             color: #fff;
             padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.75em;
             font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
         }
         .advanced-badge:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
         }
         .param-item {
             padding: 20px 25px;
-            border-bottom: 1px solid rgba(0, 123, 255, 0.1);
-            transition: all 0.3s ease;
-            color: #b8c1d4;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.08);
+            transition: all 0.4s ease;
+            color: #cbd5e1;
             cursor: pointer;
         }
         .param-item:last-child {
             border-bottom: none;
         }
         .param-item:hover {
-            background: rgba(0, 123, 255, 0.05);
+            background: rgba(59, 130, 246, 0.04);
             padding-left: 30px;
-            box-shadow: inset 0 0 10px rgba(0, 123, 255, 0.1);
+            box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.08);
         }
         .param-name {
             font-weight: 600;
-            color: #007bff;
+            color: #3b82f6;
             font-size: 1.1em;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
-            transition: color 0.3s ease;
+            transition: color 0.4s ease;
         }
         .param-item:hover .param-name {
-            color: #00c6ff;
+            color: #60a5fa;
         }
         .param-name::before {
             content: "▸";
-            color: #00c6ff;
+            color: #60a5fa;
             margin-right: 10px;
             font-weight: bold;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
         .param-item:hover .param-name::before {
-            transform: scale(1.5);
+            transform: scale(1.4);
         }
         .param-description {
-            color: #b8c1d4;
+            color: #cbd5e1;
             line-height: 1.7;
             padding-left: 20px;
-            transition: color 0.3s ease;
+            transition: color 0.4s ease;
         }
         .param-item:hover .param-description {
-            color: #e0e6ed;
+            color: #e2e8f0;
         }
         .param-suggest {
             display: inline-block;
             margin-top: 8px;
             padding: 8px 12px;
-            background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
-            border-left: 3px solid #28a745;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(34, 197, 94, 0.04) 100%);
+            border-left: 3px solid #10b981;
             border-radius: 5px;
             font-size: 0.95em;
-            color: #28a745;
-            transition: all 0.3s ease;
+            color: #10b981;
+            transition: all 0.4s ease;
         }
         .param-suggest:hover {
-            background: linear-gradient(135deg, rgba(40, 167, 69, 0.2) 0%, rgba(76, 175, 80, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(34, 197, 94, 0.08) 100%);
             border-left-width: 5px;
+            transform: translateX(5px);
         }
         .tip {
-            background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(34, 197, 94, 0.04) 100%);
             padding: 25px;
-            border-left: 5px solid #28a745;
+            border-left: 5px solid #10b981;
             margin: 20px 0;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(40, 167, 69, 0.1);
-            color: #b8c1d4;
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.08);
+            color: #cbd5e1;
+            transition: all 0.4s ease;
         }
         .tip:hover {
             border-left-width: 8px;
-            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.15);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.12);
+            transform: translateY(-2px);
         }
         .tip strong {
-            color: #28a745;
+            color: #10b981;
         }
         .warning {
-            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.05) 100%);
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(245, 158, 11, 0.04) 100%);
             padding: 25px;
-            border-left: 5px solid #ffc107;
+            border-left: 5px solid #fbbf24;
             margin: 20px 0;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(255, 193, 7, 0.1);
-            color: #b8c1d4;
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.08);
+            color: #cbd5e1;
+            transition: all 0.4s ease;
         }
         .warning:hover {
             border-left-width: 8px;
-            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.15);
+            box-shadow: 0 15px 40px rgba(251, 191, 36, 0.12);
+            transform: translateY(-2px);
         }
         .warning strong {
-            color: #ffc107;
+            color: #fbbf24;
         }
         .author-section {
             text-align: center;
-            background: linear-gradient(135deg, #0a0e17 0%, #1a1f2e 100%);
-            color: #e0e6ed;
+            background: linear-gradient(135deg, #0f1419 0%, #1e293b 100%);
+            color: #e2e8f0;
             padding: 50px;
             border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(0, 123, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.15);
             margin-top: 50px;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         .author-section:hover {
-            box-shadow: 0 20px 60px rgba(0, 123, 255, 0.1);
+            box-shadow: 0 25px 70px rgba(59, 130, 246, 0.08);
+            transform: translateY(-2px);
         }
         .author-section h2 {
-            color: #007bff;
-            border-bottom: 4px solid #007bff;
+            color: #3b82f6;
+            border-bottom: 4px solid #3b82f6;
             display: inline-block;
             padding-bottom: 15px;
             margin-bottom: 30px;
         }
         .author-section p {
-            color: rgba(224, 230, 237, 0.9);
+            color: rgba(226, 232, 240, 0.85);
             line-height: 1.9;
             margin: 20px 0;
         }
         .author-section a {
-            color: #007bff;
+            color: #3b82f6;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             border-bottom: 1px solid transparent;
         }
         .author-section a:hover {
-            color: #00c6ff;
-            border-bottom-color: #00c6ff;
-            text-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+            color: #60a5fa;
+            border-bottom-color: #60a5fa;
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
             transform: scale(1.05);
         }
         footer {
             text-align: center;
             padding: 30px;
-            color: rgba(224, 230, 237, 0.7);
+            color: rgba(226, 232, 240, 0.6);
             font-size: 0.95em;
             margin-top: 50px;
-            border-top: 1px solid rgba(0, 123, 255, 0.1);
+            border-top: 1px solid rgba(59, 130, 246, 0.08);
         }
         ul {
             padding-left: 25px;
         }
         ul li {
             margin: 15px 0;
-            color: #b8c1d4;
+            color: #cbd5e1;
             line-height: 1.8;
-            transition: color 0.3s ease;
+            transition: color 0.4s ease;
             position: relative;
         }
         ul li::before {
@@ -409,31 +416,31 @@
             top: 0;
             width: 8px;
             height: 8px;
-            background: #007bff;
+            background: #3b82f6;
             border-radius: 50%;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         ul li:hover {
-            color: #e0e6ed;
+            color: #e2e8f0;
         }
         ul li:hover::before {
-            background: #00c6ff;
-            transform: scale(1.5);
+            background: #60a5fa;
+            transform: scale(1.4);
         }
         ul li strong {
-            color: #007bff;
+            color: #3b82f6;
         }
         .cta-button {
             display: inline-block;
             margin: 20px 0;
             padding: 15px 30px;
-            background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
             color: #fff;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0, 123, 255, 0.3);
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.25);
             position: relative;
             overflow: hidden;
         }
@@ -444,7 +451,7 @@
             left: 50%;
             width: 0;
             height: 0;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
@@ -455,7 +462,7 @@
         }
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.4);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.35);
         }
         .content-en {
             display: none;
@@ -514,7 +521,7 @@
         <section id="gioi-thieu">
             <h2 class="content-vi content-en">📌 Giới Thiệu TURBO Infinity</h2>
             <p class="content-vi">
-                <strong>TURBO Infinity</strong> là Expert Advisor (EA) hàng đầu cho MetaTrader 5, được thiết kế để tối ưu hóa giao dịch tự động trên thị trường tài chính. Với cơ chế Cân Bằng Động tiên tiến, EA liên tục điều chỉnh vị thế Buy – Sell dựa trên biến động thị trường thực tế, đảm bảo sự cân bằng và giảm thiểu rủi ro.
+                <strong>TURBO Infinity</strong> là  EA MT5 vận hành theo cơ chế Cân Bằng Động. EA liên tục điều chỉnh vị thế Buy – Sell dựa trên biến động thị trường thực tế, đảm bảo sự cân bằng và giảm thiểu rủi ro.
             </p>
             <p class="content-en">
                 <strong>TURBO Infinity</strong> is a leading Expert Advisor (EA) for MetaTrader 5, designed to optimize automated trading in financial markets. With an advanced Dynamic Balance mechanism, the EA continuously adjusts Buy – Sell positions based on real-time market fluctuations, ensuring balance and minimizing risk.
@@ -537,8 +544,8 @@
                     <span class="feature-icon">🛡️</span>
                     <h3 class="content-vi">Quản Lý Rủi Ro Thông Minh</h3>
                     <h3 class="content-en">Smart Risk Management</h3>
-                    <p class="content-vi">Tự động tạm dừng và cắt lỗ để bảo vệ tài khoản trong điều kiện thị trường biến động.</p>
-                    <p class="content-en">Automatically pauses and stops losses to protect accounts during volatile markets.</p>
+                    <p class="content-vi">Tự động tạm dừng và ReEntry để bảo vệ tài khoản trong điều kiện thị trường biến động bất thường.</p>
+                    <p class="content-en">Automatically pauses and ReEntry to protect accounts during volatile markets.</p>
                 </div>
                 <div class="feature-card">
                     <span class="feature-icon">📊</span>
@@ -549,9 +556,9 @@
                 </div>
             </div>
             <div class="tip">
-                <strong class="content-vi">💡 Lợi Ích Chính:</strong>
-                <strong class="content-en">💡 Key Benefits:</strong><br>
-                <span class="content-vi">• Kết quả thực tế: 5% – 20%/ngày trên XAUUSD.<br>• Backtest: Lên đến 200% – 500%/tháng (kết quả quá khứ không đảm bảo tương lai).<br>• Vốn tối thiểu: 30.000 Cent (~300 USD).<br>• Hỗ trợ đa khung giờ và cặp tiền tệ chính.</span>
+                <strong class="content-vi">💡 Note:</strong>
+                <strong class="content-en">💡 Note:</strong><br>
+                <span class="content-vi">• Kết quả thực tế: 5% – 20%/ngày trên XAUUSD.<br>• Backtest: Lên đến 200% – 500%/tháng (kết quả quá khứ không đảm bảo tương lai).<br>• Vốn tối thiểu: 30.000 Cent (~300 USD).<br>• Hỗ trợ đa khung giờ và đa cặp tiền.</span>
                 <span class="content-en">• Real results: 5% – 20%/day on XAUUSD.<br>• Backtest: Up to 200% – 500%/month (past results do not guarantee future).<br>• Minimum capital: 30,000 Cent (~$300).<br>• Supports multiple timeframes and major pairs.</span>
             </div>
             <a href="#huong-dan" class="cta-button content-vi content-en">Hướng Dẫn Cài Đặt / Setup Guide</a>
@@ -559,8 +566,8 @@
         <section id="huong-dan">
             <h2 class="content-vi">⚙️ Hướng Dẫn Cài Đặt Thông Số</h2>
             <h2 class="content-en">⚙️ Parameter Setup Guide</h2>
-            <p style="text-align: center; font-size: 1.05em; color: #b8c1d4; margin-bottom: 30px;" class="content-vi">Hướng dẫn chi tiết cài đặt các thông số cho người mới bắt đầu.</p>
-            <p style="text-align: center; font-size: 1.05em; color: #b8c1d4; margin-bottom: 30px;" class="content-en">Detailed setup guide for beginners.</p>
+            <p style="text-align: center; font-size: 1.05em; color: #cbd5e1; margin-bottom: 30px;" class="content-vi">Hướng dẫn chi tiết cài đặt các thông số.</p>
+            <p style="text-align: center; font-size: 1.05em; color: #cbd5e1; margin-bottom: 30px;" class="content-en">Detailed setup guide for beginners.</p>
             <!-- Nhóm 1: Cài đặt cơ bản -->
             <div class="param-group">
                 <div class="param-group-header">
@@ -568,7 +575,7 @@
                     <h3 class="content-vi">CÀI ĐẶT CƠ BẢN</h3>
                     <h3 class="content-en">BASIC SETTINGS</h3>
                 </div>
-              
+             
                 <div class="param-item">
                     <div class="param-name content-vi">Ngôn ngữ Dashboard hiển thị</div>
                     <div class="param-name content-en">Dashboard Display Language</div>
@@ -916,8 +923,8 @@
                 📧 Email: <a href="mailto:tcodefx.auto@gmail.com">tcodefx.auto@gmail.com</a><br>
                 💬 Telegram: <a href="https://t.me/tCode_T95" target="_blank">t.me/tCode_T95</a>
             </p>
-            <p class="content-vi"><em>"Cân bằng là chìa khóa của sự thịnh vượng trong giao dịch!"</em></p>
-            <p class="content-en"><em>"Balance is the key to prosperity in trading!"</em></p>
+            <p class="content-vi"><em>"Cân bằng" là chìa khóa!"</em></p>
+            <p class="content-en"><em>"Balance" is the key!"</em></p>
         </section>
     </div>
     <footer>
@@ -938,26 +945,23 @@
                 });
             });
         });
-
         // Hiệu ứng nền node/blockchain
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
-
         class Node {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.radius = Math.random() * 2 + 1;
-                this.opacity = Math.random() * 0.5 + 0.2;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.opacity = Math.random() * 0.3 + 0.1;
             }
             update() {
                 this.x += this.vx;
@@ -968,34 +972,31 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(0, 123, 255, ${this.opacity})`;
+                ctx.fillStyle = `rgba(59, 130, 246, ${this.opacity})`;
                 ctx.fill();
             }
         }
-
         const nodes = [];
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 60; i++) {
             nodes.push(new Node(Math.random() * canvas.width, Math.random() * canvas.height));
         }
-
         function connectNodes() {
             for (let i = 0; i < nodes.length; i++) {
                 for (let j = i + 1; j < nodes.length; j++) {
                     const dx = nodes[i].x - nodes[j].x;
                     const dy = nodes[i].y - nodes[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < 100) {
+                    if (distance < 120) {
                         ctx.beginPath();
                         ctx.moveTo(nodes[i].x, nodes[i].y);
                         ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.strokeStyle = `rgba(0, 123, 255, ${1 - distance / 100})`;
-                        ctx.lineWidth = 0.5;
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.8 - distance / 120})`;
+                        ctx.lineWidth = 0.3;
                         ctx.stroke();
                     }
                 }
             }
         }
-
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             nodes.forEach(node => {
