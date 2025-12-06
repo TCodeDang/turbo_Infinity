@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
     <title>Giới Thiệu TURBO Infinity - EA MT5</title>
     <style>
+        * {
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: transparent;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -14,6 +19,7 @@
             line-height: 1.7;
             overflow-x: hidden;
             position: relative;
+            -webkit-appearance: none;
         }
         #particles-canvas {
             position: fixed;
@@ -23,6 +29,7 @@
             height: 100%;
             z-index: -1;
             opacity: 0.3;
+            -webkit-appearance: none;
         }
         .container {
             max-width: 1200px;
@@ -476,6 +483,22 @@
         body.lang-en .content-vi {
             display: none;
         }
+        @supports (-webkit-touch-callout: none) {
+            /* Adjustments for iOS to ensure consistent color rendering */
+            body {
+                background-color: #0f1419; /* Fallback solid color to reduce gradient interpretation issues */
+            }
+            header, section, .feature-card, .param-group, .tip, .warning, .author-section {
+                background-color: rgba(30, 41, 59, 0.5); /* Semi-solid fallback for better iOS consistency */
+                backdrop-filter: none; /* Disable blur on iOS if causing color shifts */
+            }
+            h1, h2, h3, .param-name, strong {
+                color: rgb(59, 130, 246); /* Explicit RGB to force sRGB-like rendering */
+            }
+            .lang-btn:hover, .lang-btn.active, .cta-button {
+                background-color: rgb(59, 130, 246); /* Solid fallback for buttons */
+            }
+        }
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5em;
@@ -521,7 +544,7 @@
         <section id="gioi-thieu">
             <h2 class="content-vi content-en">📌 Giới Thiệu TURBO Infinity</h2>
             <p class="content-vi">
-                <strong>TURBO Infinity</strong> là  EA MT5 vận hành theo cơ chế Cân Bằng Động. EA liên tục điều chỉnh vị thế Buy – Sell dựa trên biến động thị trường thực tế, đảm bảo sự cân bằng và giảm thiểu rủi ro.
+                <strong>TURBO Infinity</strong> là EA MT5 vận hành theo cơ chế Cân Bằng Động. EA liên tục điều chỉnh vị thế Buy – Sell dựa trên biến động thị trường thực tế, đảm bảo sự cân bằng và giảm thiểu rủi ro.
             </p>
             <p class="content-en">
                 <strong>TURBO Infinity</strong> is a leading Expert Advisor (EA) for MetaTrader 5, designed to optimize automated trading in financial markets. With an advanced Dynamic Balance mechanism, the EA continuously adjusts Buy – Sell positions based on real-time market fluctuations, ensuring balance and minimizing risk.
@@ -575,7 +598,7 @@
                     <h3 class="content-vi">CÀI ĐẶT CƠ BẢN</h3>
                     <h3 class="content-en">BASIC SETTINGS</h3>
                 </div>
-             
+            
                 <div class="param-item">
                     <div class="param-name content-vi">Ngôn ngữ Dashboard hiển thị</div>
                     <div class="param-name content-en">Dashboard Display Language</div>
