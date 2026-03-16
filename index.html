@@ -1,1035 +1,859 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="dark">
-    <title>Giới Thiệu TURBO Infinity - EA MT5</title>
-    <style>
-        * {
-            -webkit-appearance: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #0f1419 0%, #1e293b 50%, #334155 100%);
-            color: #e2e8f0;
-            line-height: 1.7;
-            overflow-x: hidden;
-            position: relative;
-            -webkit-appearance: none;
-        }
-        #particles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.3;
-            -webkit-appearance: none;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        header {
-            text-align: center;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(255, 255, 255, 0.05) 100%);
-            padding: 80px 30px;
-            border-radius: 25px;
-            margin-bottom: 50px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(59, 130, 246, 0.15);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            position: relative;
-            animation: fadeInDown 1.2s ease-out;
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        header p {
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 1.2em;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-            animation: fadeInUp 1.2s ease-out 0.4s both;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .lang-switcher {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 8px;
-            background: rgba(59, 130, 246, 0.08);
-            padding: 8px;
-            border-radius: 20px;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            transition: all 0.3s ease;
-        }
-        .lang-switcher:hover {
-            background: rgba(59, 130, 246, 0.15);
-        }
-        .lang-btn {
-            padding: 6px 12px;
-            background: transparent;
-            color: #3b82f6;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 0.85em;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-        .lang-btn:hover, .lang-btn.active {
-            background: #3b82f6;
-            color: #fff;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
-        }
-        h1 {
-            color: #3b82f6;
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 2px 2px 8px rgba(0, 0, 0, 0.4);
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            animation: glow 3s ease-in-out infinite alternate;
-        }
-        @keyframes glow {
-            from { text-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 2px 2px 8px rgba(0, 0, 0, 0.4); }
-            to { text-shadow: 0 0 30px rgba(59, 130, 246, 0.5), 2px 2px 8px rgba(0, 0, 0, 0.4); }
-        }
-        h2 {
-            color: #3b82f6;
-            border-bottom: 4px solid #3b82f6;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-            font-weight: 600;
-            position: relative;
-        }
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
-            border-radius: 2px;
-        }
-        section {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-            margin: 30px 0;
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(59, 130, 246, 0.08);
-            backdrop-filter: blur(15px);
-            animation: fadeIn 1.2s ease-out;
-            transition: all 0.4s ease;
-        }
-        section:hover {
-            box-shadow: 0 25px 70px rgba(59, 130, 246, 0.08);
-            border-color: rgba(59, 130, 246, 0.15);
-            transform: translateY(-2px);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(25px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        section h3 {
-            color: #3b82f6;
-            font-size: 1.4em;
-            margin-top: 0;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        section p {
-            color: #cbd5e1;
-            line-height: 1.9;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-        .feature-card {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.04) 0%, rgba(96, 165, 250, 0.02) 100%);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(59, 130, 246, 0.15);
-            text-align: center;
-            transition: all 0.4s ease;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.08), transparent);
-            transition: left 0.6s;
-        }
-        .feature-card:hover::before {
-            left: 100%;
-        }
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 70px rgba(59, 130, 246, 0.12);
-            border-color: rgba(59, 130, 246, 0.25);
-        }
-        .feature-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1) rotate(10deg);
-        }
-        /* Styles cho param groups - Điều chỉnh cho theme mới */
-        .param-group {
-            margin: 30px 0;
-            border: 2px solid rgba(59, 130, 246, 0.15);
-            border-radius: 15px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            transition: all 0.4s ease;
-        }
-        .param-group:hover {
-            border-color: rgba(59, 130, 246, 0.25);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.08);
-        }
-        .param-group-header {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            color: #fff;
-            padding: 20px 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: all 0.4s ease;
-        }
-        .param-group-header:hover {
-            background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
-            transform: translateX(5px);
-        }
-        .param-group-header h3 {
-            margin: 0;
-            color: #fff;
-            font-size: 1.3em;
-            font-weight: 600;
-        }
-        .group-icon {
-            font-size: 1.8em;
-            transition: transform 0.4s ease;
-        }
-        .param-group:hover .group-icon {
-            transform: scale(1.15) rotate(5deg);
-        }
-        .advanced-badge {
-            margin-left: auto;
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.75em;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s ease;
-        }
-        .advanced-badge:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
-        }
-        .param-item {
-            padding: 20px 25px;
-            border-bottom: 1px solid rgba(59, 130, 246, 0.08);
-            transition: all 0.4s ease;
-            color: #cbd5e1;
-            cursor: pointer;
-        }
-        .param-item:last-child {
-            border-bottom: none;
-        }
-        .param-item:hover {
-            background: rgba(59, 130, 246, 0.04);
-            padding-left: 30px;
-            box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.08);
-        }
-        .param-name {
-            font-weight: 600;
-            color: #3b82f6;
-            font-size: 1.1em;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            transition: color 0.4s ease;
-        }
-        .param-item:hover .param-name {
-            color: #60a5fa;
-        }
-        .param-name::before {
-            content: "▸";
-            color: #60a5fa;
-            margin-right: 10px;
-            font-weight: bold;
-            transition: transform 0.4s ease;
-        }
-        .param-item:hover .param-name::before {
-            transform: scale(1.4);
-        }
-        .param-description {
-            color: #cbd5e1;
-            line-height: 1.7;
-            padding-left: 20px;
-            transition: color 0.4s ease;
-        }
-        .param-item:hover .param-description {
-            color: #e2e8f0;
-        }
-        .param-suggest {
-            display: inline-block;
-            margin-top: 8px;
-            padding: 8px 12px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(34, 197, 94, 0.04) 100%);
-            border-left: 3px solid #10b981;
-            border-radius: 5px;
-            font-size: 0.95em;
-            color: #10b981;
-            transition: all 0.4s ease;
-        }
-        .param-suggest:hover {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(34, 197, 94, 0.08) 100%);
-            border-left-width: 5px;
-            transform: translateX(5px);
-        }
-        .tip {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(34, 197, 94, 0.04) 100%);
-            padding: 25px;
-            border-left: 5px solid #10b981;
-            margin: 20px 0;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.08);
-            color: #cbd5e1;
-            transition: all 0.4s ease;
-        }
-        .tip:hover {
-            border-left-width: 8px;
-            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.12);
-            transform: translateY(-2px);
-        }
-        .tip strong {
-            color: #10b981;
-        }
-        .warning {
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(245, 158, 11, 0.04) 100%);
-            padding: 25px;
-            border-left: 5px solid #fbbf24;
-            margin: 20px 0;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.08);
-            color: #cbd5e1;
-            transition: all 0.4s ease;
-        }
-        .warning:hover {
-            border-left-width: 8px;
-            box-shadow: 0 15px 40px rgba(251, 191, 36, 0.12);
-            transform: translateY(-2px);
-        }
-        .warning strong {
-            color: #fbbf24;
-        }
-        .author-section {
-            text-align: center;
-            background: linear-gradient(135deg, #0f1419 0%, #1e293b 100%);
-            color: #e2e8f0;
-            padding: 50px;
-            border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(59, 130, 246, 0.15);
-            margin-top: 50px;
-            transition: all 0.4s ease;
-        }
-        .author-section:hover {
-            box-shadow: 0 25px 70px rgba(59, 130, 246, 0.08);
-            transform: translateY(-2px);
-        }
-        .author-section h2 {
-            color: #3b82f6;
-            border-bottom: 4px solid #3b82f6;
-            display: inline-block;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-        }
-        .author-section p {
-            color: rgba(226, 232, 240, 0.85);
-            line-height: 1.9;
-            margin: 20px 0;
-        }
-        .author-section a {
-            color: #3b82f6;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.4s ease;
-            border-bottom: 1px solid transparent;
-        }
-        .author-section a:hover {
-            color: #60a5fa;
-            border-bottom-color: #60a5fa;
-            text-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
-            transform: scale(1.05);
-        }
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: rgba(226, 232, 240, 0.6);
-            font-size: 0.95em;
-            margin-top: 50px;
-            border-top: 1px solid rgba(59, 130, 246, 0.08);
-        }
-        ul {
-            padding-left: 25px;
-        }
-        ul li {
-            margin: 15px 0;
-            color: #cbd5e1;
-            line-height: 1.8;
-            transition: color 0.4s ease;
-            position: relative;
-        }
-        ul li::before {
-            content: '';
-            position: absolute;
-            left: -25px;
-            top: 0;
-            width: 8px;
-            height: 8px;
-            background: #3b82f6;
-            border-radius: 50%;
-            transition: all 0.4s ease;
-        }
-        ul li:hover {
-            color: #e2e8f0;
-        }
-        ul li:hover::before {
-            background: #60a5fa;
-            transform: scale(1.4);
-        }
-        ul li strong {
-            color: #3b82f6;
-        }
-        .cta-button {
-            display: inline-block;
-            margin: 20px 0;
-            padding: 15px 30px;
-            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.25);
-            position: relative;
-            overflow: hidden;
-        }
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        .cta-button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.35);
-        }
-        .content-en {
-            display: none;
-        }
-        .content-vi {
-            display: block;
-        }
-        body.lang-en .content-en {
-            display: block;
-        }
-        body.lang-en .content-vi {
-            display: none;
-        }
-        @supports (-webkit-touch-callout: none) {
-            /* Adjustments for iOS to ensure consistent color rendering */
-            body {
-                background-color: #0f1419; /* Fallback solid color to reduce gradient interpretation issues */
-            }
-            header, section, .feature-card, .param-group, .tip, .warning, .author-section {
-                background-color: rgba(30, 41, 59, 0.5); /* Semi-solid fallback for better iOS consistency */
-                backdrop-filter: none; /* Disable blur on iOS if causing color shifts */
-            }
-            h1, h2, h3, .param-name, strong {
-                color: rgb(59, 130, 246); /* Explicit RGB to force sRGB-like rendering */
-            }
-            .lang-btn:hover, .lang-btn.active, .cta-button {
-                background-color: rgb(59, 130, 246); /* Solid fallback for buttons */
-            }
-        }
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-            }
-            header {
-                padding: 50px 20px;
-            }
-            section {
-                padding: 30px 20px;
-            }
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            .lang-switcher {
-                top: 15px;
-                right: 15px;
-                gap: 5px;
-                padding: 5px;
-            }
-            .lang-btn {
-                padding: 4px 8px;
-                font-size: 0.8em;
-            }
-            .param-item:hover {
-                padding-left: 25px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TURBO Infinity EA | MT5 Expert Advisor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ══ CSS VARIABLES ══ */
+:root {
+  --bg0: #0a0c10; --bg1: #0e1116; --bg2: #141820; --bg3: #1e222a; --bg4: #2b2f36;
+  --gold: #f0b90b; --gold2: #ffd432; --gold-dim: rgba(240,185,11,0.13);
+  --buy: #0ecb81; --buy-dim: rgba(14,203,129,0.11);
+  --sell: #f6465d; --sell-dim: rgba(246,70,93,0.11);
+  --text1: #eaecef; --text2: #b0b8c8; --text3: #7a8494;
+  --border: rgba(255,255,255,0.06); --glow-gold: 0 0 40px rgba(240,185,11,0.18);
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { font-family:'Sora',sans-serif; background:var(--bg0); color:var(--text1); overflow-x:hidden; line-height:1.6; }
+a { color:inherit; text-decoration:none; }
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:var(--bg1); }
+::-webkit-scrollbar-thumb { background:var(--bg4); border-radius:3px; }
+::-webkit-scrollbar-thumb:hover { background:var(--gold); }
+body::after {
+  content:''; position:fixed; inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.025) 2px,rgba(0,0,0,0.025) 4px);
+  pointer-events:none; z-index:9998;
+}
+
+/* ══ NAV ══ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 36px; height:56px;
+  background:rgba(10,12,16,0.9); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo {
+  font-family:'Space Mono',monospace; font-weight:700; font-size:28px;
+  color:var(--gold); letter-spacing:2px; display:flex; align-items:center; gap:9px;
+}
+.nav-logo span { color:var(--text3); font-size:11px; font-weight:400; letter-spacing:1px; padding:2px 7px; border:1px solid var(--border); border-radius:3px; }
+.nav-links { display:flex; gap:24px; list-style:none; }
+.nav-links a {
+  font-size:14px; font-family:'Space Mono',monospace; color:var(--gold);
+  letter-spacing:1px; text-transform:uppercase; transition:color 0.2s; position:relative;
+}
+.nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform 0.2s; }
+.nav-links a:hover { color:var(--gold); }
+.nav-links a:hover::after { transform:scaleX(1); }
+.nav-right { display:flex; align-items:center; gap:12px; }
+.lang-toggle { display:flex; align-items:center; background:var(--bg3); border:1px solid var(--border); border-radius:20px; padding:3px; }
+.lang-btn {
+  padding:4px 11px; border-radius:16px; font-size:9px; font-family:'Space Mono',monospace;
+  letter-spacing:1px; transition:all 0.2s; cursor:pointer; border:none;
+  background:transparent; color:var(--text3);
+}
+.lang-btn.active { background:var(--gold); color:var(--bg0); font-weight:700; }
+.nav-cta {
+  font-family:'Space Mono',monospace; font-size:10px; letter-spacing:1px;
+  padding:7px 18px; background:var(--gold); color:var(--bg0);
+  border:none; cursor:pointer; font-weight:700; transition:all 0.2s;
+  clip-path:polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%);
+}
+.nav-cta:hover { background:var(--gold2); transform:translateY(-1px); }
+
+/* ══ I18N ══ */
+[data-lang] { display:none; }
+.lang-vi [data-lang="vi"] { display:block; }
+.lang-en [data-lang="en"] { display:block; }
+[data-lang-inline] { display:none; }
+.lang-vi [data-lang-inline="vi"] { display:inline; }
+.lang-en [data-lang-inline="en"] { display:inline; }
+
+/* ══ TICKER ══ */
+.ticker-wrap { overflow:hidden; background:var(--bg3); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:7px 0; margin-top:56px; }
+.ticker-track { display:flex; gap:52px; animation:ticker 22s linear infinite; width:max-content; }
+.ticker-item { font-family:'Space Mono',monospace; font-size:10px; white-space:nowrap; color:var(--text3); letter-spacing:1px; }
+.ticker-item .up { color:var(--buy); } .ticker-item .down { color:var(--sell); }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ══ REVEAL ══ */
+.reveal { opacity:0; transform:translateY(26px); transition:opacity 0.6s ease,transform 0.6s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ══ HERO ══ */
+#hero {
+  min-height:90vh; display:flex; flex-direction:column;
+  justify-content:center; align-items:flex-start;
+  padding:70px 80px 56px; position:relative; overflow:hidden;
+}
+.hero-grid-bg {
+  position:absolute; inset:0;
+  background-image:linear-gradient(rgba(240,185,11,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(240,185,11,0.03) 1px,transparent 1px);
+  background-size:60px 60px; pointer-events:none;
+}
+.hero-glow { position:absolute; top:15%; right:-200px; width:560px; height:560px; background:radial-gradient(circle,rgba(14,203,129,0.07) 0%,transparent 60%); pointer-events:none; }
+.hero-glow2 { position:absolute; bottom:-80px; left:-80px; width:420px; height:420px; background:radial-gradient(circle,rgba(240,185,11,0.05) 0%,transparent 60%); pointer-events:none; }
+.hero-badge {
+  font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--buy); background:var(--buy-dim); border:1px solid rgba(14,203,129,0.28); padding:5px 13px;
+  border-radius:2px; margin-bottom:24px; display:inline-flex; align-items:center; gap:8px;
+  opacity:0; animation:fadeUp 0.7s ease 0.1s forwards;
+}
+.hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--buy); animation:pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+.hero-title {
+  font-family:'Space Mono',monospace; font-size:clamp(32px,5.5vw,66px); font-weight:700;
+  line-height:1.08; letter-spacing:-1px; max-width:820px;
+  opacity:0; animation:fadeUp 0.7s ease 0.2s forwards;
+}
+.hero-title .t { color:var(--gold); }
+.hero-title .outline { color:transparent; -webkit-text-stroke:1px var(--gold); }
+.hero-tagline {
+  font-size:clamp(13px,1.8vw,17px); color:var(--text2); max-width:560px;
+  margin-top:20px; font-weight:300; line-height:1.8;
+  opacity:0; animation:fadeUp 0.7s ease 0.34s forwards;
+}
+.hero-tagline strong { color:var(--gold); font-weight:600; }
+.hero-stats {
+  display:flex; gap:40px; margin-top:48px;
+  opacity:0; animation:fadeUp 0.7s ease 0.48s forwards;
+}
+.stat-item { display:flex; flex-direction:column; gap:4px; }
+.stat-val { font-family:'Space Mono',monospace; font-size:24px; font-weight:700; color:var(--gold); line-height:1; }
+.stat-label { font-size:9px; color:var(--text3); letter-spacing:1px; text-transform:uppercase; }
+.hero-actions {
+  display:flex; gap:12px; margin-top:36px;
+  opacity:0; animation:fadeUp 0.7s ease 0.62s forwards;
+}
+.btn-primary {
+  font-family:'Space Mono',monospace; font-size:11px; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase; padding:12px 32px;
+  background:var(--gold); color:var(--bg0); border:none; cursor:pointer;
+  clip-path:polygon(9px 0%,100% 0%,calc(100% - 9px) 100%,0% 100%); transition:all 0.2s;
+}
+.btn-primary:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 8px 26px rgba(240,185,11,0.26); }
+.btn-secondary {
+  font-family:'Space Mono',monospace; font-size:11px; letter-spacing:1px;
+  padding:12px 28px; background:transparent; color:var(--text2);
+  border:1px solid var(--border); cursor:pointer; transition:all 0.2s;
+}
+.btn-secondary:hover { border-color:var(--gold); color:var(--gold); }
+@keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+.hero-scroll {
+  position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  opacity:0; animation:fadeUp 0.7s ease 1s forwards;
+}
+.scroll-text { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--text3); text-transform:uppercase; }
+.scroll-line { width:1px; height:34px; background:linear-gradient(to bottom,var(--gold),transparent); animation:scrollAnim 2s ease infinite; }
+@keyframes scrollAnim { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+
+/* ══ LAYOUT ══ */
+.sec-wrap { padding:84px 0; }
+.sec-wrap.alt { background:var(--bg1); }
+.inner { max-width:1140px; margin:0 auto; padding:0 44px; }
+.sec-header { margin-bottom:48px; text-align:center; }
+.sec-tag { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); opacity:0.75; display:block; margin-bottom:10px; }
+.sec-title { font-family:'Space Mono',monospace; font-size:clamp(20px,3.2vw,34px); font-weight:700; line-height:1.2; }
+.sec-title span { color:var(--gold); }
+.sec-sub { margin-top:11px; color:var(--text3); font-size:13px; max-width:500px; margin-left:auto; margin-right:auto; }
+.divider { height:1px; background:linear-gradient(to right,transparent,var(--gold-dim),transparent); margin:0 44px; }
+
+/* ══ HOW IT WORKS ══ */
+.how-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:3px; position:relative; }
+.how-grid::before {
+  content:''; position:absolute; top:38px; left:12%; right:12%; height:1px;
+  background:linear-gradient(to right,transparent,var(--gold-dim) 25%,var(--gold-dim) 75%,transparent); z-index:0;
+}
+.how-card { background:var(--bg2); border:1px solid var(--border); padding:28px 20px; text-align:center; transition:all 0.3s; }
+.how-card:hover { border-color:var(--gold-dim); background:var(--bg3); transform:translateY(-4px); box-shadow:var(--glow-gold); }
+.how-num { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--text3); text-transform:uppercase; margin-bottom:14px; }
+.how-icon { font-size:26px; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; border:1px solid var(--border); background:var(--bg2); position:relative; z-index:1; }
+.how-card:hover .how-icon { border-color:var(--gold); }
+.how-card-title { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--gold); margin-bottom:9px; }
+.how-card-desc { font-size:12px; color:var(--text3); line-height:1.75; }
+.how-card-desc strong { color:var(--text2); }
+
+/* Level cards */
+.level-display { display:flex; gap:3px; margin-top:48px; }
+.level-card { flex:1; padding:18px 16px; background:var(--bg3); border:1px solid var(--border); text-align:center; transition:all 0.3s; }
+.level-card:hover { transform:translateY(-3px); }
+.level-card.conservative { border-top:2px solid var(--buy); }
+.level-card.balanced { border-top:2px solid var(--gold); }
+.level-card.aggressive { border-top:2px solid var(--sell); }
+.level-name { font-family:'Space Mono',monospace; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:7px; }
+.conservative .level-name { color:var(--buy); } .balanced .level-name { color:var(--gold); } .aggressive .level-name { color:var(--sell); }
+.level-pnl { font-size:9px; color:var(--text3); margin-bottom:5px; }
+.level-be { font-family:'Space Mono',monospace; font-size:13px; color:var(--text1); font-weight:700; }
+.level-mult { font-size:10px; color:var(--text3); margin-top:3px; }
+.level-note { font-size:9px; margin-top:7px; font-style:italic; }
+.conservative .level-note { color:var(--buy); } .balanced .level-note { color:var(--gold); } .aggressive .level-note { color:var(--sell); }
+
+/* ══ FEATURES ══ */
+.features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.feat-card { background:var(--bg2); border:1px solid var(--border); padding:26px 22px; position:relative; overflow:hidden; transition:all 0.3s; }
+.feat-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,transparent 60%,var(--gold-dim)); opacity:0; transition:opacity 0.3s; }
+.feat-card:hover { border-color:rgba(240,185,11,0.25); transform:translateY(-4px); }
+.feat-card:hover::before { opacity:1; }
+.feat-card.buy-card { border-top:2px solid var(--buy); } .feat-card.sell-card { border-top:2px solid var(--sell); } .feat-card.gold-card { border-top:2px solid var(--gold); }
+.feat-icon { font-size:24px; margin-bottom:14px; display:block; }
+.feat-title { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; color:var(--text1); margin-bottom:9px; }
+.feat-desc { font-size:12px; color:var(--text3); line-height:1.8; }
+.feat-desc strong { color:var(--text2); }
+.feat-tag { display:inline-block; margin-top:12px; font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; padding:3px 9px; border-radius:2px; text-transform:uppercase; }
+.tag-buy { background:var(--buy-dim); color:var(--buy); } .tag-sell { background:var(--sell-dim); color:var(--sell); } .tag-gold { background:var(--gold-dim); color:var(--gold); }
+
+/* ══ INPUTS ══ */
+.inputs-tabs { display:flex; gap:3px; margin-top:36px; flex-wrap:wrap; }
+.tab-btn {
+  font-family:'Space Mono',monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+  padding:8px 16px; background:var(--bg3); border:1px solid var(--border);
+  color:var(--text3); cursor:pointer; transition:all 0.2s; border-radius:2px;
+}
+.tab-btn.active,.tab-btn:hover { background:var(--gold-dim); border-color:var(--gold); color:var(--gold); }
+.tab-content { display:none; margin-top:18px; }
+.tab-content.active { display:block; }
+.params-table { width:100%; border-collapse:collapse; font-size:12px; }
+.params-table th { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text3); text-align:left; padding:10px 14px; border-bottom:1px solid var(--border); background:var(--bg3); }
+.params-table td { padding:12px 14px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.5; }
+.params-table tr:hover td { background:rgba(255,255,255,0.02); }
+.param-name { font-family:'Space Mono',monospace; color:var(--gold); font-size:11px; }
+.param-default { font-family:'Space Mono',monospace; color:var(--buy); font-size:11px; white-space:nowrap; }
+.param-desc { color:var(--text2); }
+.param-note { font-size:10px; color:var(--text3); margin-top:3px; font-style:italic; }
+
+/* ══ CTA ══ */
+.cta-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:48px; }
+.contact-card { background:var(--bg2); border:1px solid var(--border); padding:28px 24px; position:relative; overflow:hidden; transition:all 0.3s; }
+.contact-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.contact-card.zalo-card::before { background:linear-gradient(to right,var(--buy),transparent); }
+.contact-card.tg-card::before { background:linear-gradient(to right,#2AABEE,transparent); }
+.contact-card.tg-group-card::before { background:linear-gradient(to right,var(--gold),transparent); }
+.contact-card:hover { border-color:rgba(255,255,255,0.1); transform:translateY(-4px); }
+.contact-platform { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--text3); margin-bottom:10px; }
+.contact-name { font-family:'Space Mono',monospace; font-size:18px; font-weight:700; margin-bottom:5px; }
+.zalo-card .contact-name { color:var(--buy); } .tg-card .contact-name { color:#2AABEE; } .tg-group-card .contact-name { color:var(--gold); }
+.contact-id { font-family:'Space Mono',monospace; font-size:13px; color:var(--text1); margin-bottom:12px; }
+.contact-desc { font-size:12px; color:var(--text3); line-height:1.75; margin-bottom:20px; }
+.contact-link {
+  display:inline-flex; align-items:center; gap:6px; font-family:'Space Mono',monospace;
+  font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+  padding:9px 18px; border:1px solid; transition:all 0.2s; cursor:pointer; border-radius:2px;
+}
+.zalo-card .contact-link { color:var(--buy); border-color:rgba(14,203,129,0.35); }
+.zalo-card .contact-link:hover { background:var(--buy-dim); }
+.tg-card .contact-link { color:#2AABEE; border-color:rgba(42,171,238,0.35); }
+.tg-card .contact-link:hover { background:rgba(42,171,238,0.08); }
+.tg-group-card .contact-link { color:var(--gold); border-color:rgba(240,185,11,0.35); }
+.tg-group-card .contact-link:hover { background:var(--gold-dim); }
+
+.services-box { margin-top:44px; background:var(--bg2); border:1px solid var(--border); padding:32px 36px; position:relative; }
+.services-box::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(to right,var(--gold),transparent); }
+.services-label { font-family:'Space Mono',monospace; font-size:15px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:22px; }
+.services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.service-item { display:flex; flex-direction:column; gap:6px; }
+.service-icon { font-size:20px; }
+.service-name { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--text1); }
+.service-desc { font-size:11px; color:var(--text3); line-height:1.65; }
+.contact-info-bar { display:flex; gap:24px; margin-top:28px; padding-top:24px; border-top:1px solid var(--border); flex-wrap:wrap; }
+.contact-info-item { display:flex; align-items:center; gap:7px; font-size:11px; }
+.contact-info-item span { color:var(--text3); }
+.contact-info-item a,.contact-info-item strong { font-family:'Space Mono',monospace; color:var(--text2); font-size:10px; }
+.contact-info-item a:hover { color:var(--gold); }
+
+.disclaimer { margin-top:44px; padding:16px 22px; background:rgba(246,70,93,0.04); border:1px solid rgba(246,70,93,0.14); border-radius:2px; font-size:12px; color:var(--text3); display:flex; align-items:flex-start; gap:10px; }
+.disclaimer strong { color:var(--sell); }
+
+footer { text-align:center; padding:32px; border-top:1px solid var(--border); font-family:'Space Mono',monospace; font-size:11px; color:var(--text3); letter-spacing:1px; }
+footer span { color:var(--gold); }
+
+/* ══ RESPONSIVE ══ */
+@media (max-width:1024px) {
+  .how-grid { grid-template-columns:repeat(2,1fr); }
+  .features-grid { grid-template-columns:repeat(2,1fr); }
+  .cta-grid { grid-template-columns:repeat(2,1fr); }
+  .services-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:768px) {
+  nav { padding:0 16px; }
+  .nav-links { display:none; }
+  #hero { padding:72px 20px 48px; }
+  .inner { padding:0 20px; }
+  .how-grid { grid-template-columns:1fr; }
+  .how-grid::before { display:none; }
+  .features-grid { grid-template-columns:1fr; }
+  .cta-grid { grid-template-columns:1fr; }
+  .services-grid { grid-template-columns:1fr; }
+  .hero-stats { gap:20px; flex-wrap:wrap; }
+  .hero-actions { flex-direction:column; }
+  .level-display { flex-direction:column; }
+  .contact-info-bar { flex-direction:column; gap:12px; }
+}
+</style>
 </head>
 <body class="lang-vi">
-    <canvas id="particles-canvas"></canvas>
-    <div class="container">
-        <header>
-            <div class="lang-switcher">
-                <button class="lang-btn active" onclick="switchLang('vi')">🇻🇳 VI</button>
-                <button class="lang-btn" onclick="switchLang('en')">🇺🇸 EN</button>
-            </div>
-            <h1 class="content-vi">♾️ TURBO Infinity - EA MT5</h1>
-            <h1 class="content-en">♾️ TURBO Infinity - EA MT5</h1>
-            <p class="content-vi">Giải pháp giao dịch tự động tiên tiến dựa trên Cân bằng động thời gian thực</p>
-            <p class="content-en">Advanced Automated Trading Solution Based on Real-Time Dynamic Balance</p>
-        </header>
-        <section id="gioi-thieu">
-            <h2 class="content-vi content-en">📌 Giới Thiệu TURBO Infinity</h2>
-            <p class="content-vi">
-                <strong>TURBO Infinity</strong> là EA MT5 vận hành theo cơ chế Cân Bằng Động. EA liên tục điều chỉnh vị thế Buy – Sell dựa trên biến động thị trường thực tế, đảm bảo sự cân bằng và giảm thiểu rủi ro.
-            </p>
-            <p class="content-en">
-                <strong>TURBO Infinity</strong> is a leading Expert Advisor (EA) for MetaTrader 5, designed to optimize automated trading in financial markets. With an advanced Dynamic Balance mechanism, the EA continuously adjusts Buy – Sell positions based on real-time market fluctuations, ensuring balance and minimizing risk.
-            </p>
-            <p class="content-vi">
-                Sử dụng Liquidity Pool Balancer, TURBO Infinity tự động cân đối lot size, cập nhật mục tiêu Breakeven (BE), và tối ưu hóa Profit and Loss (PnL). EA bám sát biên độ dao động thời gian thực để quyết định điểm vào lệnh và thoát lệnh, phân bổ khoảng cách lệnh một cách thông minh, đồng thời điều chỉnh lot và mục tiêu lợi nhuận phù hợp với điều kiện thị trường.
-            </p>
-            <p class="content-en">
-                Utilizing Liquidity Pool Balancer, TURBO Infinity automatically balances lot sizes, updates Breakeven (BE) targets, and optimizes Profit and Loss (PnL). The EA tracks real-time oscillation ranges to determine entry and exit points, intelligently allocates order spacing, and adjusts lots and profit targets according to market conditions.
-            </p>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <span class="feature-icon">⚡</span>
-                    <h3 class="content-vi">Tốc Độ Cao</h3>
-                    <h3 class="content-en">High Speed</h3>
-                    <p class="content-vi">Ưu tiên vòng quay vốn nhanh chóng, thu hồi vốn sớm với hiệu suất vượt trội.</p>
-                    <p class="content-en">Prioritizes rapid capital turnover and early recovery with superior performance.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🛡️</span>
-                    <h3 class="content-vi">Quản Lý Rủi Ro Thông Minh</h3>
-                    <h3 class="content-en">Smart Risk Management</h3>
-                    <p class="content-vi">Tự động tạm dừng và ReEntry để bảo vệ tài khoản trong điều kiện thị trường biến động bất thường.</p>
-                    <p class="content-en">Automatically pauses and ReEntry to protect accounts during volatile markets.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">📊</span>
-                    <h3 class="content-vi">Phân Tích Thời Gian Thực</h3>
-                    <h3 class="content-en">Real-Time Analysis</h3>
-                    <p class="content-vi">Theo dõi spread, tốc độ giá và đột biến nến để giao dịch an toàn hơn.</p>
-                    <p class="content-en">Monitors spreads, price speed, and candle spikes for safer trading.</p>
-                </div>
-            </div>
-            <div class="tip">
-                <strong class="content-vi">💡 Note:</strong>
-                <strong class="content-en">💡 Note:</strong><br>
-                <span class="content-vi">• Kết quả thực tế: 5% – 20%/ngày trên XAUUSD.<br>• Backtest: Lên đến 200% – 500%/tháng (kết quả quá khứ không đảm bảo tương lai).<br>• Vốn tối thiểu: 30.000 Cent (~300 USD).<br>• Hỗ trợ đa khung giờ và đa cặp tiền.</span>
-                <span class="content-en">• Real results: 5% – 20%/day on XAUUSD.<br>• Backtest: Up to 200% – 500%/month (past results do not guarantee future).<br>• Minimum capital: 30,000 Cent (~$300).<br>• Supports multiple timeframes and major pairs.</span>
-            </div>
-            <a href="#huong-dan" class="cta-button content-vi content-en">Hướng Dẫn Cài Đặt / Setup Guide</a>
-        </section>
-        <section id="huong-dan">
-            <h2 class="content-vi">⚙️ Hướng Dẫn Cài Đặt Thông Số</h2>
-            <h2 class="content-en">⚙️ Parameter Setup Guide</h2>
-            <p style="text-align: center; font-size: 1.05em; color: #cbd5e1; margin-bottom: 30px;" class="content-vi">Hướng dẫn chi tiết cài đặt các thông số.</p>
-            <p style="text-align: center; font-size: 1.05em; color: #cbd5e1; margin-bottom: 30px;" class="content-en">Detailed setup guide for beginners.</p>
-            <!-- Nhóm 1: Cài đặt cơ bản -->
-            <div class="param-group">
-                <div class="param-group-header">
-                    <span class="group-icon">🔧</span>
-                    <h3 class="content-vi">CÀI ĐẶT CƠ BẢN</h3>
-                    <h3 class="content-en">BASIC SETTINGS</h3>
-                </div>
-            
-                <div class="param-item">
-                    <div class="param-name content-vi">Ngôn ngữ Dashboard hiển thị</div>
-                    <div class="param-name content-en">Dashboard Display Language</div>
-                    <div class="param-description content-vi">
-                        Chọn ngôn ngữ hiển thị thông tin trên màn hình: <strong>Tiếng Việt</strong> hoặc <strong>English</strong>. Giúp người dùng theo dõi trạng thái bot dễ dàng hơn.
-                    </div>
-                    <div class="param-description content-en">
-                        Select the display language for on-screen information: <strong>Vietnamese</strong> or <strong>English</strong>. Helps users easily monitor bot status.
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Lot ban đầu</div>
-                    <div class="param-name content-en">Initial Lot</div>
-                    <div class="param-description content-vi">
-                        Khối lượng giao dịch cho lệnh đầu tiên.<br>
-                        <span class="param-suggest">💡 Khuyến nghị: Bắt đầu với <strong>0.01</strong> để kiểm soát vốn.</span>
-                    </div>
-                    <div class="param-description content-en">
-                        Trading volume for the first order.<br>
-                        <span class="param-suggest">💡 Recommendation: Start with <strong>0.01</strong> to control capital.</span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Lot tối đa/lệnh</div>
-                    <div class="param-name content-en">Maximum Lot per Order</div>
-                    <div class="param-description content-vi">
-                        Giới hạn khối lượng tối đa cho một lệnh. Bảo vệ tài khoản khỏi rủi ro quá lớn khi EA tăng lot tự động.<br>
-                        <span class="param-suggest">💡 Khuyến nghị: <strong>10</strong> (mặc định)</span>
-                    </div>
-                    <div class="param-description content-en">
-                        Maximum volume limit per order. Protects the account from excessive risk when the EA auto-increases lots.<br>
-                        <span class="param-suggest">💡 Recommendation: <strong>10</strong> (default)</span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Biên độ lệnh tối thiểu (pips)</div>
-                    <div class="param-name content-en">Minimum Order Spacing (pips)</div>
-                    <div class="param-description content-vi">
-                        Khoảng cách tối thiểu giữa các lệnh Buy hoặc Sell (tính bằng pips). Khoảng cách sẽ tự động lấy theo biên độ trung bình của thị trường, và tính toán của bộ lọc cân bằng, tuy nhiên thông số này sẽ giới hạn mức tối thiểu.<br>
-                        <span class="param-suggest">💡 Khuyến nghị: <strong>30 pips</strong> (mặc định)</span>
-                    </div>
-                    <div class="param-description content-en">
-                        Minimum distance between Buy or Sell orders (in pips). The distance is automatically based on market average range and balance filter calculations, but this parameter sets the minimum limit.<br>
-                        <span class="param-suggest">💡 Recommendation: <strong>30 pips</strong> (default)</span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">TP theo chênh lệch lot ($/0.01 lot)</div>
-                    <div class="param-name content-en">TP by Lot Difference ($/0.01 lot)</div>
-                    <div class="param-description content-vi">
-                        Mục tiêu lợi nhuận tính theo chênh lệch lot giữa Buy và Sell. <br>
-                        <em>Ví dụ:</em> Nếu chênh 0.05 lot và giá trị này là <strong>1</strong>, thì TP khoảng 5$.<br>
-                        <span class="param-suggest">💡 Có thể tự điều chỉnh thủ công .</span>
-                    </div>
-                    <div class="param-description content-en">
-                        Profit target calculated by lot difference between Buy and Sell. <br>
-                        <em>Example:</em> If difference is 0.05 lots and value is <strong>1</strong>, TP is about $5.<br>
-                        <span class="param-suggest">💡 Can be manually adjusted.</span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Cắt lỗ toàn bộ ($)</div>
-                    <div class="param-name content-en">Full Stop Loss ($)</div>
-                    <div class="param-description content-vi">
-                        Mức lỗ tối đa cho phép (số âm). Khi tổng lỗ đạt mức này, EA sẽ đóng toàn bộ lệnh để bảo vệ vốn.<br>
-                        <span class="param-suggest">⚠️ Quan trọng: Đặt giá trị hợp lý với số dư tài khoản (<strong>Cắt lỗ số tiền có thể chấp nhận thua lỗ và trong tầm kiểm soát rủi ro</strong>)</span>
-                    </div>
-                    <div class="param-description content-en">
-                        Maximum allowable loss (negative number). When total loss reaches this level, EA closes all orders to protect capital.<br>
-                        <span class="param-suggest">⚠️ Important: Set a reasonable value based on account balance (<strong>Set stop loss to an acceptable loss amount within risk control</strong>)</span>
-                    </div>
-                </div>
-            </div>
-            <!-- Nhóm 2: Khung giờ -->
-            <div class="param-group">
-                <div class="param-group-header">
-                    <span class="group-icon">⏰</span>
-                    <h3 class="content-vi">KHUNG GIỜ GIAO DỊCH (GMT+7)</h3>
-                    <h3 class="content-en">TRADING HOURS (GMT+7)</h3>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Bật/Tắt khung thời gian giao dịch</div>
-                    <div class="param-name content-en">Enable/Disable Trading Hours</div>
-                    <div class="param-description content-vi">
-                        Chọn <strong>"true"</strong> để EA chỉ giao dịch trong khung giờ nhất định, <strong>"false"</strong> để chạy 24/7.<br>
-                        <span class="param-suggest">💡 Hữu ích để tránh các phiên có biến động bất thường hoặc tin tức quan trọng.</span>
-                    </div>
-                    <div class="param-description content-en">
-                        Select <strong>"true"</strong> for EA to trade only in specific hours, <strong>"false"</strong> for 24/7 operation.<br>
-                        <span class="param-suggest">💡 Useful to avoid sessions with unusual volatility or major news.</span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Giờ bắt đầu 1 & Giờ kết thúc 1</div>
-                    <div class="param-name content-en">Start Time 1 & End Time 1</div>
-                    <div class="param-description content-vi">
-                        Khung giờ giao dịch thứ nhất (định dạng HH:MM).<br>
-                        <span class="param-suggest">💡 Ví dụ: <strong>07:00 - 13:30</strong> (phiên Á)</span>
-                    </div>
-                    <div class="param-description content-en">
-                        First trading hour frame (HH:MM format).<br>
-                        <span class="param-suggest">💡 Example: <strong>07:00 - 13:30</strong> (Asian session)</span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Giờ bắt đầu 2 & Giờ kết thúc 2</div>
-                    <div class="param-name content-en">Start Time 2 & End Time 2</div>
-                    <div class="param-description content-vi">
-                        Khung giờ giao dịch thứ hai (định dạng HH:MM).<br>
-                        <span class="param-suggest">💡 Ví dụ: <strong>14:30 - 23:00</strong> (phiên Âu/Mỹ)</span>
-                    </div>
-                    <div class="param-description content-en">
-                        Second trading hour frame (HH:MM format).<br>
-                        <span class="param-suggest">💡 Example: <strong>14:30 - 23:00</strong> (European/US session)</span>
-                    </div>
-                </div>
-            </div>
-            <!-- Nhóm 3: Tạm dừng -->
-            <div class="param-group">
-                <div class="param-group-header">
-                    <span class="group-icon">⏸️</span>
-                    <h3 class="content-vi">TẠM DỪNG THEO % TÀI KHOẢN</h3>
-                    <h3 class="content-en">PAUSE BY % ACCOUNT</h3>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Bật/Tắt tạm dừng theo % Tài khoản</div>
-                    <div class="param-name content-en">Enable/Disable Pause by % Account</div>
-                    <div class="param-description content-vi">
-                        Chọn <strong>"true"</strong> để EA tự động tạm dừng giao dịch khi tài khoản lỗ đến mức % nhất định.<br>
-                        <span class="param-suggest">🛡️ Bảo vệ vốn trong điều kiện thị trường xấu, khi tạm dừng sẽ không vào thêm lệnh mới nhưng, các lệnh vẫn giữ nguyên.</span>
-                    </div>
-                    <div class="param-description content-en">
-                        Select <strong>"true"</strong> for EA to auto-pause trading when account loss reaches a certain %.<br>
-                        <span class="param-suggest">🛡️ Protects capital in bad market conditions; during pause, no new orders are placed, but existing ones remain.</span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Mức tạm dừng 1: Kích hoạt & Hủy</div>
-                    <div class="param-name content-en">Pause Level 1: Activate & Deactivate</div>
-                    <div class="param-description content-vi">
-                        <strong>Kích hoạt:</strong> Mức lỗ % để tạm dừng (ví dụ: <strong>-3%</strong>)<br>
-                        <strong>Hủy:</strong> Mức lỗ % để tiếp tục giao dịch (ví dụ: <strong>-12%</strong>)<br>
-                        <span class="param-suggest">💡 Dùng cho drawdown nhỏ, bảo vệ vốn, kiểm soát rủi ro từ sớm.</span>
-                    </div>
-                    <div class="param-description content-en">
-                        <strong>Activate:</strong> Loss % to pause (e.g., <strong>-3%</strong>)<br>
-                        <strong>Deactivate:</strong> Loss % to resume trading (e.g., <strong>-12%</strong>)<br>
-                        <span class="param-suggest">💡 For small drawdowns, protects capital and controls risk early.</span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Mức tạm dừng 2: Kích hoạt & Hủy</div>
-                    <div class="param-name content-en">Pause Level 2: Activate & Deactivate</div>
-                    <div class="param-description content-vi">
-                        <strong>Kích hoạt:</strong> Mức lỗ % để tạm dừng (ví dụ: <strong>-29%</strong>)<br>
-                        <strong>Hủy:</strong> Mức lỗ % để tiếp tục giao dịch (ví dụ: <strong>-40%</strong>)<br>
-                        <span class="param-suggest">💡 Dùng cho drawdown lớn, tránh cháy tài khoản.</span>
-                    </div>
-                    <div class="param-description content-en">
-                        <strong>Activate:</strong> Loss % to pause (e.g., <strong>-29%</strong>)<br>
-                        <strong>Deactivate:</strong> Loss % to resume (e.g., <strong>-40%</strong>)<br>
-                        <span class="param-suggest">💡 For large drawdowns, prevents account blowup.</span>
-                    </div>
-                </div>
-            </div>
-            <!-- Nhóm 4: Nâng cao -->
-            <div class="param-group">
-                <div class="param-group-header">
-                    <span class="group-icon">🔬</span>
-                    <h3 class="content-vi">CÀI ĐẶT NÂNG CAO</h3>
-                    <h3 class="content-en">ADVANCED SETTINGS</h3>
-                    <span class="advanced-badge content-vi content-en">Recommended to Default</span>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Ngưỡng mất cân bằng (0.05-0.2)</div>
-                    <div class="param-name content-en">Imbalance Threshold (0.05-0.2)</div>
-                    <div class="param-description content-vi">
-                        Mức ngưỡng chênh lệch giữa Buy và Sell (từ 0.05 đến 0.2), khi vượt quá sẽ kích hoạt điều chỉnh để giữ vị thế cân bằng, tránh lệch hướng quá mức.<br>
-                        <span class="param-suggest">💡 Giá trị nhỏ hơn = cân bằng nhanh và chặt chẽ hơn. Mặc định: <strong>0.2</strong></span>
-                    </div>
-                    <div class="param-description content-en">
-                        Threshold for Buy-Sell difference (0.05 to 0.2); exceeds this to trigger adjustments for balance, avoiding excessive bias.<br>
-                        <span class="param-suggest">💡 Lower value = faster and tighter balance. Default: <strong>0.2</strong></span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Hệ số điều chỉnh lot (0.3-1)</div>
-                    <div class="param-name content-en">Lot Adjustment Factor (0.3-1)</div>
-                    <div class="param-description content-vi">
-                        Hệ số nhân để điều chỉnh lot khi mất cân bằng (từ 0.3 đến 1), quyết định tốc độ thay đổi lot để khôi phục sự cân bằng nhanh hay chậm.<br>
-                        <span class="param-suggest">💡 Giá trị cao = điều chỉnh mạnh. Mặc định: <strong>0.3</strong></span>
-                    </div>
-                    <div class="param-description content-en">
-                        Multiplier for lot adjustment on imbalance (0.3 to 1), determines speed of lot changes for balance recovery.<br>
-                        <span class="param-suggest">💡 Higher value = stronger adjustment. Default: <strong>0.3</strong></span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">% rủi ro/lệnh theo equity (0.2-1)</div>
-                    <div class="param-name content-en">% Risk per Order by Equity (0.2-1)</div>
-                    <div class="param-description content-vi">
-                        Phần trăm vốn (equity) sử dụng để tính lot cho mỗi lệnh.<br>
-                        <span class="param-suggest">💡 Giá trị thấp = bảo toàn vốn lâu dài. Mặc định: <strong>0.6%</strong></span>
-                    </div>
-                    <div class="param-description content-en">
-                        Percentage of equity used to calculate lot per order.<br>
-                        <span class="param-suggest">💡 Lower value = long-term capital preservation. Default: <strong>0.6%</strong></span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Pips về BE để tính lot</div>
-                    <div class="param-name content-en">Pips to BE for Lot Calculation</div>
-                    <div class="param-description content-vi">
-                        Số pips cần phục hồi về Breakeven (BE) để tính toán lot cho lệnh DCA tiếp theo, ảnh hưởng đến tốc độ mở rộng vị thế khi giá quay đầu.<br>
-                        <span class="param-suggest">💡 Mặc định: <strong>1100</strong>. Giảm nếu muốn nhanh hơn.</span>
-                    </div>
-                    <div class="param-description content-en">
-                        Pips needed to recover to Breakeven (BE) to calculate lot for next DCA order, affects position expansion speed on reversal.<br>
-                        <span class="param-suggest">💡 Default: <strong>1100</strong>. Reduce for faster.</span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Khung thời gian kiểm tra</div>
-                    <div class="param-name content-en">Check Timeframe</div>
-                    <div class="param-description content-vi">
-                        Khung thời gian (M5, M15, v.v.) mà EA sử dụng để phân tích biến động thị trường.<br>
-                        <span class="param-suggest">💡 <strong>M5</strong> = nhạy hơn | <strong>M15</strong> = ổn định hơn</span>
-                    </div>
-                    <div class="param-description content-en">
-                        Timeframe (M5, M15, etc.) EA uses to analyze market volatility.<br>
-                        <span class="param-suggest">💡 <strong>M5</strong> = more sensitive | <strong>M15</strong> = more stable</span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Ngưỡng tốc độ giá (points/tick)</div>
-                    <div class="param-name content-en">Price Speed Threshold (points/tick)</div>
-                    <div class="param-description content-vi">
-                        Ngưỡng tốc độ thay đổi giá để phát hiện biến động mạnh.<br>
-                        <span class="param-suggest">💡 EA tạm dừng khi giá thay đổi nhanh hơn ngưỡng. Mặc định: <strong>2000</strong></span>
-                    </div>
-                    <div class="param-description content-en">
-                        Threshold for price change speed to detect strong volatility.<br>
-                        <span class="param-suggest">💡 EA pauses if price changes faster than threshold. Default: <strong>2000</strong></span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Tỷ lệ nến đột biến</div>
-                    <div class="param-name content-en">Spike Candle Ratio</div>
-                    <div class="param-description content-vi">
-                        Tỷ lệ so sánh kích thước nến hiện tại với nến trung bình để phát hiện đột biến giá.<br>
-                        <span class="param-suggest">💡 Giá trị cao = lọc chặt hơn. Mặc định: <strong>2.4</strong></span>
-                    </div>
-                    <div class="param-description content-en">
-                        Ratio comparing current candle size to average to detect price spikes.<br>
-                        <span class="param-suggest">💡 Higher value = stricter filter. Default: <strong>2.4</strong></span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Spread tối đa (points)</div>
-                    <div class="param-name content-en">Maximum Spread (points)</div>
-                    <div class="param-description content-vi">
-                        Spread tối đa cho phép (khoảng cách giữa giá mua và bán).<br>
-                        <span class="param-suggest">💡 EA không mở lệnh khi spread > ngưỡng. Mặc định: <strong>80</strong></span>
-                    </div>
-                    <div class="param-description content-en">
-                        Maximum allowed spread (buy-sell price difference).<br>
-                        <span class="param-suggest">💡 EA does not open orders if spread > threshold. Default: <strong>80</strong></span>
-                    </div>
-                </div>
-                <div class="param-item">
-                    <div class="param-name content-vi">Thời gian Tạm Ngừng sau đột biến (phút)</div>
-                    <div class="param-name content-en">Pause Time After Spike (minutes)</div>
-                    <div class="param-description content-vi">
-                        Thời gian EA tạm ngừng giao dịch sau khi phát hiện đột biến giá mạnh.<br>
-                        <span class="param-suggest">💡 Tránh rủi ro trong giai đoạn thị trường hỗn loạn. Mặc định: <strong>180 phút</strong> (3 giờ)</span>
-                    </div>
-                    <div class="param-description content-en">
-                        Time EA pauses trading after detecting strong price spike.<br>
-                        <span class="param-suggest">💡 Avoids risk during chaotic market phases. Default: <strong>180 minutes</strong> (3 hours)</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="luu-y">
-            <h2 class="content-vi">📋 Lưu Ý Quan Trọng</h2>
-            <h2 class="content-en">📋 Important Notes</h2>
-            <ul class="content-vi">
-                <li><strong>Backtest trước khi sử dụng:</strong> Kiểm tra trên Strategy Tester với dữ liệu lịch sử để hiểu hành vi EA.</li>
-                <li><strong>Theo dõi hàng ngày:</strong> Giám sát kết nối VPS, thanh khoản thị trường và tránh giao dịch trong tin tức lớn.</li>
-                <li><strong>Cộng đồng hỗ trợ:</strong> Tham gia Telegram Group để cập nhật phiên bản mới và chia sẻ kinh nghiệm: <a href="https://t.me/TCode_TradingHeBot" target="_blank">https://t.me/TCode_TradingHeBot</a></li>
-            </ul>
-            <ul class="content-en">
-                <li><strong>Backtest before use:</strong> Test on Strategy Tester with historical data to understand EA behavior.</li>
-                <li><strong>Daily monitoring:</strong> Monitor VPS connections, market liquidity, and avoid trading during major news.</li>
-                <li><strong>Community support:</strong> Join Telegram Group for new version updates and experience sharing: <a href="https://t.me/TCode_TradingHeBot" target="_blank">https://t.me/TCode_TradingHeBot</a></li>
-            </ul>
-        </section>
-        <section id="canh-bao">
-            <h2 class="content-vi content-en">⚠️ Cảnh Báo Rủi Ro</h2>
-            <div class="warning">
-                <p class="content-vi">
-                    <strong>Giao dịch tự động với đòn bẩy cao có thể dẫn đến mất toàn bộ vốn.</strong>
-                </p>
-                <p class="content-en">
-                    <strong>Automated trading with high leverage can result in total capital loss.</strong>
-                </p>
-                <p class="content-vi">
-                    TURBO Infinity là công cụ hỗ trợ giao dịch, không đảm bảo lợi nhuận. Hãy hiểu rõ rủi ro trước khi sử dụng.
-                </p>
-                <p class="content-en">
-                    TURBO Infinity is a trading support tool, not a guarantee of profits. Understand the risks fully before use.
-                </p>
-                <p class="content-vi">
-                    Tác giả không chịu trách nhiệm cho bất kỳ tổn thất nào. Đây không phải lời khuyên tài chính.
-                </p>
-                <p class="content-en">
-                    The author is not liable for any losses. This is not financial advice.
-                </p>
-            </div>
-        </section>
-        <section id="tac-gia" class="author-section">
-            <h2 class="content-vi content-en">👨‍💻 Nhà Phát Triển & Thông Tin</h2>
-            <p class="content-vi">
-                TURBO Infinity được phát triển bởi <strong>Mr.TCode™</strong> - Chuyên gia lập trình EA MT4/MT5 với hơn 5 năm kinh nghiệm.
-            </p>
-            <p class="content-en">
-                TURBO Infinity developed by <strong>Mr.TCode™</strong> - Expert in MT4/MT5 EA programming with over 5 years of experience.
-            </p>
-            <p class="content-vi">
-                Đăng ký tài khoản qua link đối tác để sử dụng <strong>MIỄN PHÍ tất cả bot trong hệ sinh thái TCode™</strong>:<br>
-                🏦 <strong>Sàn: Vantage</strong><br>
-                🔗 <a href="https://vigco.co/la-com/vi/L2rDYca8" target="_blank">Link: https://vigco.co/la-com/vi/L2rDYca8</a><br>
-                🎯 Mã đối tác: L2rDYca8
-            </p>
-            <p class="content-en">
-                Register via partner link to use <strong>ALL bots in TCode™ ecosystem FOR FREE</strong>:<br>
-                🏦 <strong>Broker: Vantage</strong><br>
-                🔗 <a href="https://vigco.co/la-com/vi/L2rDYca8" target="_blank">Account Opening Link</a><br>
-                🎯 Partner Code: L2rDYca8
-            </p>
-            <p>
-                <strong class="content-vi">Liên hệ hỗ trợ:</strong>
-                <strong class="content-en">Contact Support:</strong><br>
-                📱 Zalo: <a href="https://zalo.me/0964822327" target="_blank">0964.822.327</a><br>
-                📧 Email: <a href="mailto:tcodefx.auto@gmail.com">tcodefx.auto@gmail.com</a><br>
-                💬 Telegram: <a href="https://t.me/tCode_T95" target="_blank">t.me/tCode_T95</a>
-            </p>
-            <p class="content-vi"><em>"Cân bằng" là chìa khóa!"</em></p>
-            <p class="content-en"><em>"Balance" is the key!"</em></p>
-        </section>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-logo">TCODE <span>TechTrader</span></div>
+  <ul class="nav-links">
+    <li><a href="#how"><span data-lang-inline="vi">Cơ Chế</span><span data-lang-inline="en">How It Works</span></a></li>
+    <li><a href="#features"><span data-lang-inline="vi">Tính Năng</span><span data-lang-inline="en">Features</span></a></li>
+    <li><a href="#inputs"><span data-lang-inline="vi">Thông Số</span><span data-lang-inline="en">Parameters</span></a></li>
+    <li><a href="#cta"><span data-lang-inline="vi">Liên Hệ</span><span data-lang-inline="en">Contact</span></a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('vi')">VI</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
-    <footer>
-        <p>&copy; 2025 Mr.TCode™. All rights reserved. Phiên bản giới thiệu: 1.1</p>
-    </footer>
-    <script>
-        function switchLang(lang) {
-            document.body.className = 'lang-' + lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            document.documentElement.lang = lang;
-        }
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        // Hiệu ứng nền node/blockchain
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-        class Node {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.vx = (Math.random() - 0.5) * 0.3;
-                this.vy = (Math.random() - 0.5) * 0.3;
-                this.radius = Math.random() * 1.5 + 0.5;
-                this.opacity = Math.random() * 0.3 + 0.1;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(59, 130, 246, ${this.opacity})`;
-                ctx.fill();
-            }
-        }
-        const nodes = [];
-        for (let i = 0; i < 60; i++) {
-            nodes.push(new Node(Math.random() * canvas.width, Math.random() * canvas.height));
-        }
-        function connectNodes() {
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx = nodes[i].x - nodes[j].x;
-                    const dy = nodes[i].y - nodes[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < 120) {
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.8 - distance / 120})`;
-                        ctx.lineWidth = 0.3;
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            nodes.forEach(node => {
-                node.update();
-                node.draw();
-            });
-            connectNodes();
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
+    <a href="#cta" class="nav-cta">
+      <span data-lang-inline="vi">Liên Hệ</span><span data-lang-inline="en">Contact</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ══ TICKER ══ -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">XAUUSD <span class="up">+0.45%</span></span>
+    <span class="ticker-item">DCA Strategy <span class="up">✓</span></span>
+    <span class="ticker-item">Hedging <span class="up">✓</span></span>
+    <span class="ticker-item">Pyramid <span class="up">✓</span></span>
+    <span class="ticker-item">EURUSD <span class="down">-0.12%</span></span>
+    <span class="ticker-item">Auto Lot Sizing <span class="up">✓</span></span>
+    <span class="ticker-item">Risk Management <span class="up">✓</span></span>
+    <span class="ticker-item">MT5 EA <span class="up">v1.4</span></span>
+    <span class="ticker-item">Smart Filter <span class="up">✓</span></span>
+    <span class="ticker-item">GBPUSD <span class="up">+0.08%</span></span>
+    <span class="ticker-item">XAUUSD <span class="up">+0.45%</span></span>
+    <span class="ticker-item">DCA Strategy <span class="up">✓</span></span>
+    <span class="ticker-item">Hedging <span class="up">✓</span></span>
+    <span class="ticker-item">Pyramid <span class="up">✓</span></span>
+    <span class="ticker-item">EURUSD <span class="down">-0.12%</span></span>
+    <span class="ticker-item">Auto Lot Sizing <span class="up">✓</span></span>
+    <span class="ticker-item">Risk Management <span class="up">✓</span></span>
+    <span class="ticker-item">MT5 EA <span class="up">v1.4</span></span>
+    <span class="ticker-item">Smart Filter <span class="up">✓</span></span>
+    <span class="ticker-item">GBPUSD <span class="up">+0.08%</span></span>
+  </div>
+</div>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-badge">
+    <span data-lang-inline="vi">● MT5 Expert Advisor · Phiên Bản 1.4</span>
+    <span data-lang-inline="en">● MT5 Expert Advisor · Version 1.4</span>
+  </div>
+<h1 class="hero-title">
+    <span class="t"></span> TURBO <span class="outline">Infinity</span> EA
+</h1>
+  </h1>
+  <p class="hero-tagline">
+    <span data-lang-inline="vi">Bot giao dịch tự động — kết hợp <strong>DCA thích ứng</strong>, <strong>Hedging song hướng</strong> và <strong>Pyramid nhồi dương</strong>. Tự động cân bằng rủi ro và điều chỉnh lot theo trạng thái tài khoản — chạy 24/7.</span>
+    <span data-lang-inline="en">Automated trading bot — combining <strong>adaptive DCA</strong>, <strong>two-way Hedging</strong> and <strong>Pyramid stacking</strong>. Auto-balances risk and adjusts lot size based on account state — runs 24/7.</span>
+  </p>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-val">3</span>
+      <span class="stat-label"><span data-lang-inline="vi">Chiến lược</span><span data-lang-inline="en">Strategies</span></span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val">3</span>
+      <span class="stat-label"><span data-lang-inline="vi">Cấp rủi ro</span><span data-lang-inline="en">Risk Levels</span></span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val">24/7</span>
+      <span class="stat-label"><span data-lang-inline="vi">Tự động</span><span data-lang-inline="en">Automated</span></span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val">MT5</span>
+      <span class="stat-label"><span data-lang-inline="vi">Nền tảng</span><span data-lang-inline="en">Platform</span></span>
+    </div>
+  </div>
+  <div class="hero-actions">
+    <a href="#how" class="btn-primary">
+      <span data-lang-inline="vi">Xem Cơ Chế</span><span data-lang-inline="en">How It Works</span>
+    </a>
+    <a href="#cta" class="btn-secondary">
+      <span data-lang-inline="vi">Liên Hệ Ngay →</span><span data-lang-inline="en">Contact Now →</span>
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-text"><span data-lang-inline="vi">cuộn xuống</span><span data-lang-inline="en">scroll down</span></span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ HOW IT WORKS ══ -->
+<div id="how" class="sec-wrap alt">
+<div class="inner">
+  <div class="sec-header reveal">
+    <span class="sec-tag"><span data-lang-inline="vi"></span><span data-lang-inline="en">// How It Works</span></span>
+    <h2 class="sec-title">
+      <span data-lang-inline="vi">Cơ Chế Hoạt Động <span></span></span>
+      <span data-lang-inline="en">How Does the <span>Bot Work?</span></span>
+    </h2>
+    <p class="sec-sub">
+      <span data-lang-inline="vi">3 tầng chiến lược phối hợp nhịp nhàng — DCA · Hedging · Pyramid</span>
+      <span data-lang-inline="en">3 layered strategies working in harmony — DCA · Hedging · Pyramid</span>
+    </p>
+  </div>
+  <div class="how-grid">
+    <div class="how-card reveal">
+      <div class="how-num">01</div>
+      <div class="how-icon">📡</div>
+      <div class="how-card-title"><span data-lang-inline="vi">PHÁT HIỆN TÍN HIỆU</span><span data-lang-inline="en">SIGNAL DETECTION</span></div>
+      <p class="how-card-desc">
+        <span data-lang-inline="vi">Kiểm tra nến M5 trước: <strong>nến tăng → BUY</strong>, nến giảm → SELL. Chế độ Filter chỉ vào lệnh khi thị trường đủ biến động — spread, velocity, candle expansion.</span>
+        <span data-lang-inline="en">Checks previous M5 candle: <strong>bullish → BUY</strong>, bearish → SELL. Filter mode only enters when market shows sufficient volatility — spread, velocity, candle expansion.</span>
+      </p>
+    </div>
+    <div class="how-card reveal">
+      <div class="how-num">02</div>
+      <div class="how-icon">⚖️</div>
+      <div class="how-card-title"><span data-lang-inline="vi">HEDGING ĐỐI ỨNG</span><span data-lang-inline="en">COUNTER HEDGING</span></div>
+      <p class="how-card-desc">
+        <span data-lang-inline="vi">Khi giá đi ngược hướng vượt <strong>biên độ tối thiểu</strong>, bot mở lệnh đối ứng để cân bằng 2 chiều, giảm thiểu lỗ một phía và tạo thế phòng thủ.</span>
+        <span data-lang-inline="en">When price moves beyond the <strong>minimum step</strong>, bot opens a counter order to balance both directions, reducing one-sided loss.</span>
+      </p>
+    </div>
+    <div class="how-card reveal">
+      <div class="how-num">03</div>
+      <div class="how-icon">🔄</div>
+      <div class="how-card-title"><span data-lang-inline="vi">DCA THÍCH ỨNG</span><span data-lang-inline="en">ADAPTIVE DCA</span></div>
+      <p class="how-card-desc">
+        <span data-lang-inline="vi">Tự động tính lot DCA theo mức lỗ thực tế. Chuyển đổi linh hoạt giữa 3 cấp độ <strong>Conservative → Balanced → Aggressive</strong> theo tổng PnL.</span>
+        <span data-lang-inline="en">Auto-calculates DCA lot by actual loss. Dynamically shifts between 3 levels: <strong>Conservative → Balanced → Aggressive</strong> based on total PnL.</span>
+      </p>
+    </div>
+    <div class="how-card reveal">
+      <div class="how-num">04</div>
+      <div class="how-icon">🏆</div>
+      <div class="how-card-title"><span data-lang-inline="vi">PYRAMID + CHỐT LỜI</span><span data-lang-inline="en">PYRAMID + TAKE PROFIT</span></div>
+      <p class="how-card-desc">
+        <span data-lang-inline="vi">Khi xu hướng rõ ràng, bot nhồi thêm lệnh Pyramid để <strong>tối đa hóa lợi nhuận</strong>. Tự đóng toàn bộ khi tổng PnL đạt mục tiêu.</span>
+        <span data-lang-inline="en">During clear trends, bot stacks Pyramid orders to <strong>maximize profit</strong>. Auto-closes all when total PnL hits the target.</span>
+      </p>
+    </div>
+  </div>
+  <div class="level-display reveal">
+    <div class="level-card conservative">
+      <div class="level-name">Conservative</div>
+      <div class="level-pnl"><span data-lang-inline="vi">Lỗ &lt; $200</span><span data-lang-inline="en">Loss &lt; $200</span></div>
+      <div class="level-be">600 pips BE</div>
+      <div class="level-mult"><span data-lang-inline="vi">Nhân lot</span><span data-lang-inline="en">Lot mult</span> × 1.1</div>
+      <div class="level-note">🛡️ <span data-lang-inline="vi">An toàn</span><span data-lang-inline="en">Safe mode</span></div>
+    </div>
+    <div class="level-card balanced">
+      <div class="level-name">Balanced</div>
+      <div class="level-pnl"><span data-lang-inline="vi">Lỗ $200–$600</span><span data-lang-inline="en">Loss $200–$600</span></div>
+      <div class="level-be">300 pips BE</div>
+      <div class="level-mult"><span data-lang-inline="vi">Nhân lot</span><span data-lang-inline="en">Lot mult</span> × 1.3</div>
+      <div class="level-note">⚖️ <span data-lang-inline="vi">Cân bằng</span><span data-lang-inline="en">Balanced</span></div>
+    </div>
+    <div class="level-card aggressive">
+      <div class="level-name">Aggressive</div>
+      <div class="level-pnl"><span data-lang-inline="vi">Lỗ &gt; $600</span><span data-lang-inline="en">Loss &gt; $600</span></div>
+      <div class="level-be">180 pips BE</div>
+      <div class="level-mult"><span data-lang-inline="vi">Nhân lot</span><span data-lang-inline="en">Lot mult</span> × 2.8</div>
+      <div class="level-note">⚡ <span data-lang-inline="vi">Bung lực gỡ</span><span data-lang-inline="en">Recovery push</span></div>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:10px;color:var(--text3);margin-top:12px;font-family:'Space Mono',monospace;">
+    <span data-lang-inline="vi">↑ Tự động chuyển cấp theo tổng PnL — không cần can thiệp thủ công</span>
+    <span data-lang-inline="en">↑ Auto-switches level by total PnL — no manual intervention needed</span>
+  </p>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══ FEATURES ══ -->
+<div id="features" class="sec-wrap">
+<div class="inner">
+  <div class="sec-header reveal">
+    <span class="sec-tag"><span data-lang-inline="vi"></span><span data-lang-inline="en">// Key Features</span></span>
+    <h2 class="sec-title">
+      <span data-lang-inline="vi">Tính Năng Nổi Bật<span></span></span>
+      <span data-lang-inline="en">Why Choose <span></span></span>
+    </h2>
+  </div>
+  <div class="features-grid">
+    <div class="feat-card buy-card reveal">
+      <span class="feat-icon">🔀</span>
+      <div class="feat-title"><span data-lang-inline="vi">Hedging Song Hướng</span><span data-lang-inline="en">Two-Way Hedging</span></div>
+      <p class="feat-desc"><span data-lang-inline="vi">Giữ cả BUY và SELL cùng lúc. Bot <strong>không bị kẹt</strong> — luôn có lệnh ăn tiền dù giá đi hướng nào.</span><span data-lang-inline="en">Holds both BUY and SELL simultaneously. Bot is <strong>never stuck</strong> — always has a profitable leg regardless of direction.</span></p>
+      <span class="feat-tag tag-buy">Core Strategy</span>
+    </div>
+    <div class="feat-card gold-card reveal">
+      <span class="feat-icon">📊</span>
+      <div class="feat-title"><span data-lang-inline="vi">DCA Thích Ứng 3 Cấp</span><span data-lang-inline="en">3-Level Adaptive DCA</span></div>
+      <p class="feat-desc"><span data-lang-inline="vi">Tự động tính lot DCA dựa trên <strong>mức lỗ thực tế</strong>. Cấp Aggressive kích hoạt khi cần bung lực gỡ nhanh.</span><span data-lang-inline="en">Auto-calculates DCA lot based on <strong>actual loss</strong>. Aggressive level kicks in for rapid recovery when needed.</span></p>
+      <span class="feat-tag tag-gold">Smart Risk</span>
+    </div>
+    <div class="feat-card sell-card reveal">
+      <span class="feat-icon">📈</span>
+      <div class="feat-title"><span data-lang-inline="vi">Pyramid Nhồi Dương</span><span data-lang-inline="en">Pyramid Stacking</span></div>
+      <p class="feat-desc"><span data-lang-inline="vi">Khi xu hướng mạnh, nhồi thêm lệnh cùng chiều để <strong>tối đa lợi nhuận</strong>. Lot nhỏ, rủi ro thấp, hiệu quả cao.</span><span data-lang-inline="en">During strong trends, stacks same-direction orders to <strong>maximize profit</strong>. Small lot, low risk, high efficiency.</span></p>
+      <span class="feat-tag tag-sell">Profit Max</span>
+    </div>
+    <div class="feat-card gold-card reveal">
+      <span class="feat-icon">⚡</span>
+      <div class="feat-title"><span data-lang-inline="vi">Bộ Lọc Biến Động</span><span data-lang-inline="en">Volatility Filter</span></div>
+      <p class="feat-desc"><span data-lang-inline="vi">3 cảm biến độc lập: <strong>spread spike, candle expansion, price velocity</strong>. Tránh vào lệnh khi tin tức hoặc thanh khoản thấp.</span><span data-lang-inline="en">3 independent sensors: <strong>spread spike, candle expansion, price velocity</strong>. Avoids entries during news or low liquidity.</span></p>
+      <span class="feat-tag tag-gold">Filter</span>
+    </div>
+    <div class="feat-card buy-card reveal">
+      <span class="feat-icon">🛡️</span>
+      <div class="feat-title"><span data-lang-inline="vi">Quản Lý Vốn Tự Động</span><span data-lang-inline="en">Auto Risk Management</span></div>
+      <p class="feat-desc"><span data-lang-inline="vi">Kiểm tra margin trước lệnh. Giới hạn lot tối đa mỗi lệnh. <strong>Cắt lỗ tổng</strong> tự động khi vượt ngưỡng.</span><span data-lang-inline="en">Checks margin before entry. Caps max lot. <strong>Global stop-loss</strong> auto-fires when threshold is breached.</span></p>
+      <span class="feat-tag tag-buy">Safety</span>
+    </div>
+    <div class="feat-card sell-card reveal">
+      <span class="feat-icon">🖥️</span>
+      <div class="feat-title"><span data-lang-inline="vi">Dashboard Realtime</span><span data-lang-inline="en">Realtime Dashboard</span></div>
+      <p class="feat-desc"><span data-lang-inline="vi">Panel canvas kéo được trên MT5. Equity, lot, PnL từng hướng, <strong>progress bar chốt lời</strong>, trạng thái bot và nút điều khiển nhanh.</span><span data-lang-inline="en">Draggable canvas panel on MT5. Equity, lots, per-side PnL, <strong>TP progress bar</strong>, bot status and quick control buttons.</span></p>
+      <span class="feat-tag tag-sell">Visual</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══ INPUTS ══ -->
+<div id="inputs" class="sec-wrap alt">
+<div class="inner">
+  <div class="sec-header reveal">
+    <span class="sec-tag"><span data-lang-inline="vi"></span><span data-lang-inline="en">// Input Parameters</span></span>
+    <h2 class="sec-title">
+      <span data-lang-inline="vi"><span>Thông Số Cài Đặt</span></span>
+      <span data-lang-inline="en">Parameter <span>Reference Guide</span></span>
+    </h2>
+    <p class="sec-sub">
+      <span data-lang-inline="vi">Tên hiển thị trong MT5 — dễ hiểu cho trader mới</span>
+      <span data-lang-inline="en">Names as shown in MT5 — beginner-friendly explanations</span>
+    </p>
+  </div>
+  <div class="inputs-tabs reveal">
+    <button class="tab-btn active" onclick="switchTab('basic',this)">⚙️ <span data-lang-inline="vi">Cơ Bản</span><span data-lang-inline="en">Basic</span></button>
+    <button class="tab-btn" onclick="switchTab('lot',this)">📦 <span data-lang-inline="vi">Quản Lý Lot</span><span data-lang-inline="en">Lot Mgmt</span></button>
+    <button class="tab-btn" onclick="switchTab('timer',this)">⏰ <span data-lang-inline="vi">Khung Giờ</span><span data-lang-inline="en">Schedule</span></button>
+    <button class="tab-btn" onclick="switchTab('volatility',this)">⚡ <span data-lang-inline="vi">Biến Động</span><span data-lang-inline="en">Volatility</span></button>
+    <button class="tab-btn" onclick="switchTab('levels',this)">📊 <span data-lang-inline="vi">3 Cấp Độ</span><span data-lang-inline="en">3 Levels</span></button>
+  </div>
+
+  <div id="tab-basic" class="tab-content active reveal">
+    <table class="params-table">
+      <thead><tr>
+        <th><span data-lang-inline="vi">Tên trong MT5</span><span data-lang-inline="en">MT5 Label</span></th>
+        <th><span data-lang-inline="vi">Mặc Định</span><span data-lang-inline="en">Default</span></th>
+        <th><span data-lang-inline="vi">Giải Thích</span><span data-lang-inline="en">Explanation</span></th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="param-name">Lot ban đầu</span></td>
+          <td><span class="param-default">0.01</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Lot cho lệnh đầu tiên và Pyramid. Trader mới nên giữ 0.01–0.03.</span><div class="param-note">⚠️ Lot càng nhỏ, rủi ro càng thấp</div></span><span data-lang-inline="en"><span class="param-desc">Lot for the first entry and Pyramid orders. Beginners: keep at 0.01–0.03.</span><div class="param-note">⚠️ Smaller lot = lower risk</div></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Biên độ lệnh tối thiểu (pips)</span></td>
+          <td><span class="param-default">160</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Khoảng cách tối thiểu giữa các lệnh. Bot chỉ mở lệnh mới khi giá cách lệnh cũ ít nhất N pips.</span><div class="param-note">💡 XAUUSD: 160 pips ≈ $1.6 biên độ</div></span><span data-lang-inline="en"><span class="param-desc">Minimum distance between orders. Bot only opens a new order when price moves at least N pips from the last.</span><div class="param-note">💡 XAUUSD: 160 pips ≈ $1.6 range</div></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Chốt lãi theo lệch lot ($/0.01 lot)</span></td>
+          <td><span class="param-default">1.2</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Mục tiêu lợi nhuận theo chênh lệch lot BUY/SELL. Khi PnL ≥ giá trị × 100 × |lot_diff|, bot chốt toàn bộ.</span><div class="param-note">💡 Ví dụ: lot_diff=0.05 → target=$6</div></span><span data-lang-inline="en"><span class="param-desc">Profit target by BUY/SELL lot difference. When PnL ≥ value × 100 × |lot_diff|, bot closes all.</span><div class="param-note">💡 Example: lot_diff=0.05 → target=$6</div></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Cắt lỗ toàn bộ ($)</span></td>
+          <td><span class="param-default">-x$</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Ngưỡng cắt lỗ khẩn cấp toàn bộ. Mặc định rất lớn — hãy cài theo mức chịu đựng thực tế của bạn.</span><div class="param-note">⚠️ $1000 vốn → nên cài -300 đến -500</div></span><span data-lang-inline="en"><span class="param-desc">Emergency global stop-loss. Default is very large — set it to match your actual risk tolerance.</span><div class="param-note">⚠️ $1000 account → set -300 to -500</div></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="tab-lot" class="tab-content reveal">
+    <table class="params-table">
+      <thead><tr>
+        <th><span data-lang-inline="vi">Tên trong MT5</span><span data-lang-inline="en">MT5 Label</span></th>
+        <th><span data-lang-inline="vi">Mặc Định</span><span data-lang-inline="en">Default</span></th>
+        <th><span data-lang-inline="vi">Giải Thích</span><span data-lang-inline="en">Explanation</span></th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="param-name">Lot khởi đầu (dùng cho lệnh đầu & pyramid)</span></td>
+          <td><span class="param-default">0.01</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Lot cơ sở trong hàm tính lot — giá trị gốc trước khi nhân hệ số DCA.</span></span><span data-lang-inline="en"><span class="param-desc">Base lot in the lot-calculation function — raw value before DCA multiplier is applied.</span></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Lot tối đa cho mỗi lệnh</span></td>
+          <td><span class="param-default">0.3</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Van an toàn quan trọng nhất — bot không bao giờ vào lệnh quá mức này dù DCA tính ra số lớn hơn.</span><div class="param-note">🛡️ Giới hạn cứng</div></span><span data-lang-inline="en"><span class="param-desc">Most important safety valve — bot never enters with more than this lot, even if DCA calculation is higher.</span><div class="param-note">🛡️ Hard ceiling</div></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Chế độ chọn level</span></td>
+          <td><span class="param-default">AutoByTotalPNL</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc"><strong>Manual:</strong> Luôn dùng Balanced. <strong>AutoByTotalPNL:</strong> Tự chuyển cấp theo tổng lỗ — khuyến nghị.</span></span><span data-lang-inline="en"><span class="param-desc"><strong>Manual:</strong> Always uses Balanced. <strong>AutoByTotalPNL:</strong> Auto-switches by total loss — recommended.</span></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Khi lỗ &gt; mức này → chuyển sang Aggressive</span></td>
+          <td><span class="param-default">-200</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Khi tổng lỗ vượt ngưỡng này → bot chuyển cấp Aggressive để gỡ nhanh hơn.</span><div class="param-note">💡 Điều chỉnh theo kích cỡ tài khoản</div></span><span data-lang-inline="en"><span class="param-desc">When total loss exceeds this → bot switches to Aggressive for faster recovery.</span><div class="param-note">💡 Scale to your account size</div></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Khi lỗ &gt; mức này → chuyển sang Balanced</span></td>
+          <td><span class="param-default">-600</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Khi tổng lỗ trong khoảng này → ở cấp Balanced. Lỗ ít hơn → Conservative.</span></span><span data-lang-inline="en"><span class="param-desc">When loss is in this range → stays at Balanced. Less loss → Conservative.</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="tab-timer" class="tab-content reveal">
+    <table class="params-table">
+      <thead><tr>
+        <th><span data-lang-inline="vi">Tên trong MT5</span><span data-lang-inline="en">MT5 Label</span></th>
+        <th><span data-lang-inline="vi">Mặc Định</span><span data-lang-inline="en">Default</span></th>
+        <th><span data-lang-inline="vi">Giải Thích</span><span data-lang-inline="en">Explanation</span></th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="param-name">Bật/Tắt thời gian giao dịch</span></td>
+          <td><span class="param-default">false</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc"><strong>false:</strong> Chạy 24/7. <strong>true:</strong> Chỉ mở lệnh mới trong khung giờ. Lệnh đang mở vẫn quản lý ngoài giờ.</span></span><span data-lang-inline="en"><span class="param-desc"><strong>false:</strong> Runs 24/7. <strong>true:</strong> Only opens new orders within the time window. Existing orders still managed outside.</span></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Giờ mở bot (GMT+7)</span></td>
+          <td><span class="param-default">07:00</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Giờ bắt đầu cho phép mở lệnh mới theo giờ Việt Nam (GMT+7). Định dạng HH:MM.</span></span><span data-lang-inline="en"><span class="param-desc">Time to start allowing new orders in Vietnam time (GMT+7). Format: HH:MM.</span></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Giờ ngưng bot (GMT+7)</span></td>
+          <td><span class="param-default">23:59</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Giờ dừng mở lệnh mới theo GMT+7. Sau giờ này bot chỉ quản lý lệnh đang mở.</span><div class="param-note">💡 Tránh 00:00–06:00 thanh khoản thấp</div></span><span data-lang-inline="en"><span class="param-desc">Time to stop opening new orders. Bot only manages open orders after this time.</span><div class="param-note">💡 Avoid 00:00–06:00 low liquidity</div></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="tab-volatility" class="tab-content reveal">
+    <table class="params-table">
+      <thead><tr>
+        <th><span data-lang-inline="vi">Tên trong MT5</span><span data-lang-inline="en">MT5 Label</span></th>
+        <th><span data-lang-inline="vi">Mặc Định</span><span data-lang-inline="en">Default</span></th>
+        <th><span data-lang-inline="vi">Giải Thích</span><span data-lang-inline="en">Explanation</span></th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="param-name">Chế độ bộ lọc biến động</span></td>
+          <td><span class="param-default">filter</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc"><strong>filter:</strong> Lệnh đầu chỉ mở khi đủ biến động. <strong>free:</strong> Vào lệnh tức thì không kiểm tra.</span><div class="param-note">💡 Mới dùng nên chọn "free"</div></span><span data-lang-inline="en"><span class="param-desc"><strong>filter:</strong> First order only enters when volatility is sufficient. <strong>free:</strong> Enter immediately without check.</span><div class="param-note">💡 Beginners: start with "free"</div></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Khung thời gian kiểm tra</span></td>
+          <td><span class="param-default">M5</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Khung thời gian dùng để kiểm tra biến động nến và đọc tín hiệu nến trước đó.</span></span><span data-lang-inline="en"><span class="param-desc">Timeframe used to check candle volatility and read the previous candle signal.</span></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Ngưỡng tốc độ giá (point/tick)</span></td>
+          <td><span class="param-default">2000</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Tốc độ di chuyển giá (điểm/giây) tối thiểu để xác định thị trường đang biến động cao.</span></span><span data-lang-inline="en"><span class="param-desc">Minimum price movement speed (points/sec) to identify a high-volatility market condition.</span></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Tỷ lệ nến đột biến</span></td>
+          <td><span class="param-default">2.4×</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Nếu nến hiện tại lớn gấp 2.4× nến trung bình 30 nến gần nhất → xem là biến động đột biến.</span></span><span data-lang-inline="en"><span class="param-desc">If current candle is 2.4× larger than the 30-candle average → classified as a volatility spike.</span></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Spread tối đa (points)</span></td>
+          <td><span class="param-default">80</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Nếu spread vượt mức này, bot bỏ qua lệnh để tránh trượt giá và chi phí cao.</span></span><span data-lang-inline="en"><span class="param-desc">If spread exceeds this, bot skips the entry to avoid slippage and high trading costs.</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="tab-levels" class="tab-content reveal">
+    <table class="params-table">
+      <thead><tr>
+        <th><span data-lang-inline="vi">Tên trong MT5</span><span data-lang-inline="en">MT5 Label</span></th>
+        <th><span data-lang-inline="vi">Mặc Định</span><span data-lang-inline="en">Default</span></th>
+        <th><span data-lang-inline="vi">Giải Thích</span><span data-lang-inline="en">Explanation</span></th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="param-name">Pips về BE - mức bảo thủ</span></td>
+          <td><span class="param-default">600</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Số pips cần để Break Even ở cấp Conservative. Bot tính lot DCA để kéo điểm hòa vốn về đây.</span><div class="param-note">📊 Conservative level</div></span><span data-lang-inline="en"><span class="param-desc">Pips to reach Break Even at Conservative level. DCA lot is sized to bring BE to this target.</span><div class="param-note">📊 Conservative level</div></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Nhân lot max - mức bảo thủ</span></td>
+          <td><span class="param-default">1.1×</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Hệ số nhân lot tối đa khi rebalance ở cấp Conservative. Nhỏ → an toàn, tăng chậm.</span></span><span data-lang-inline="en"><span class="param-desc">Max lot multiplier at Conservative level during rebalancing. Small → safe, slow increase.</span></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Pips về BE - mức cân bằng</span></td>
+          <td><span class="param-default">300</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Số pips Break Even ở cấp Balanced — tích cực hơn Conservative.</span><div class="param-note">📊 Balanced level</div></span><span data-lang-inline="en"><span class="param-desc">Break Even pips at Balanced level — more aggressive than Conservative.</span><div class="param-note">📊 Balanced level</div></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Nhân lot max - mức cân bằng</span></td>
+          <td><span class="param-default">1.3×</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Hệ số nhân lot ở cấp Balanced — tăng lot vừa phải để cân bằng trở lại.</span></span><span data-lang-inline="en"><span class="param-desc">Lot multiplier at Balanced level — moderately increases lot to rebalance.</span></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Pips về BE - mức mạnh tay</span></td>
+          <td><span class="param-default">180</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Số pips Break Even ở cấp Aggressive — kéo điểm hòa vốn về gần hơn rất nhiều.</span><div class="param-note">⚠️ Aggressive level</div></span><span data-lang-inline="en"><span class="param-desc">Break Even pips at Aggressive level — pulls BE much closer for rapid recovery.</span><div class="param-note">⚠️ Aggressive level</div></span></td>
+        </tr>
+        <tr>
+          <td><span class="param-name">Nhân lot max - mức mạnh tay</span></td>
+          <td><span class="param-default">2.8×</span></td>
+          <td><span data-lang-inline="vi"><span class="param-desc">Hệ số nhân lot mạnh nhất — bot tăng lot đáng kể để gỡ nhanh khi lỗ sâu.</span><div class="param-note">⚠️ Lot lớn = rủi ro cao — luôn kiểm tra Lot tối đa</div></span><span data-lang-inline="en"><span class="param-desc">Strongest lot multiplier — bot significantly increases lot for fast recovery during deep drawdown.</span><div class="param-note">⚠️ High lot = high risk — always verify Max Lot setting</div></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══ CTA ══ -->
+<div id="cta" class="sec-wrap">
+<div class="inner">
+  <div class="sec-header reveal">
+    <span class="sec-tag"><span data-lang-inline="vi"></span><span data-lang-inline="en">// Contact & Support</span></span>
+    <h2 class="sec-title">
+      <span data-lang-inline="vi">Liên Hệ & Hỗ Trợ<span></span></span>
+      <span data-lang-inline="en">Get Started <span>Today</span></span>
+    </h2>
+    <p class="sec-sub">
+      <span data-lang-inline="vi">Tư vấn miễn phí — hỗ trợ cài đặt tận tình</span>
+      <span data-lang-inline="en">Free consultation — full setup support included</span>
+    </p>
+  </div>
+
+  <div class="cta-grid">
+    <div class="contact-card zalo-card reveal">
+      <div class="contact-platform"><span data-lang-inline="vi">Liên Hệ Trực Tiếp</span><span data-lang-inline="en">Direct Contact</span></div>
+      <div class="contact-name">Zalo</div>
+      <div class="contact-id">0964 822 327</div>
+      <p class="contact-desc"><span data-lang-inline="vi">Nhắn tin để được hỗ trợ nhanh nhất. Tư vấn chiến lược, cài đặt EA, và giải đáp mọi thắc mắc.</span><span data-lang-inline="en">Message for fastest support. Strategy advice, EA setup help, and all questions answered.</span></p>
+      <a href="https://zalo.me/0964822327" target="_blank" class="contact-link">
+        <span data-lang-inline="vi">Chat Zalo →</span><span data-lang-inline="en">Chat on Zalo →</span>
+      </a>
+    </div>
+    <div class="contact-card tg-card reveal">
+      <div class="contact-platform"><span data-lang-inline="vi">Kênh Cá Nhân</span><span data-lang-inline="en">Personal Channel</span></div>
+      <div class="contact-name">Telegram</div>
+      <div class="contact-id">t.me/tCode_T95</div>
+      <p class="contact-desc"><span data-lang-inline="vi">Cập nhật phiên bản mới, tín hiệu, tips vận hành bot và thông tin mới nhất từ TCode.</span><span data-lang-inline="en">Latest EA updates, trading signals, bot operation tips and announcements.</span></p>
+      <a href="https://t.me/tCode_T95" target="_blank" class="contact-link">
+        <span data-lang-inline="vi">Theo Dõi →</span><span data-lang-inline="en">Follow →</span>
+      </a>
+    </div>
+    <div class="contact-card tg-group-card reveal">
+      <div class="contact-platform"><span data-lang-inline="vi">Nhóm & Kho Bot</span><span data-lang-inline="en">Group & Bot Library</span></div>
+      <div class="contact-name">TCode Community</div>
+      <div class="contact-id">t.me/TCode_TradingHeBot</div>
+      <p class="contact-desc"><span data-lang-inline="vi">Cộng đồng TCode — kho EA, chia sẻ bot, thảo luận chiến lược và giao lưu cùng các trader.</span><span data-lang-inline="en">TCode community — EA library, bot sharing, strategy discussions and trader networking.</span></p>
+      <a href="https://t.me/TCode_TradingHeBot" target="_blank" class="contact-link">
+        <span data-lang-inline="vi">Vào Nhóm →</span><span data-lang-inline="en">Join Group →</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="services-box reveal">
+    <div class="services-label"><span data-lang-inline="vi"> Dịch Vụ của TCODE</span><span data-lang-inline="en">// Services</span></div>
+    <div class="services-grid">
+      <div class="service-item">
+        <span class="service-icon">🤖</span>
+        <div class="service-name"><span data-lang-inline="vi">Code Bot MT4/MT5</span><span data-lang-inline="en">MT4/MT5 Bot Development</span></div>
+        <p class="service-desc"><span data-lang-inline="vi">Nhận code Expert Advisor theo yêu cầu — từ chiến lược đơn giản đến hệ thống phức tạp.</span><span data-lang-inline="en">Custom Expert Advisors on request — from simple strategies to complex multi-layer systems.</span></p>
+      </div>
+      <div class="service-item">
+        <span class="service-icon">🛠️</span>
+        <div class="service-name"><span data-lang-inline="vi">Tool & Indicator</span><span data-lang-inline="en">Tools & Indicators</span></div>
+        <p class="service-desc"><span data-lang-inline="vi">Indicator custom, script tiện ích, panel thông tin cho MT4 & MT5.</span><span data-lang-inline="en">Custom indicators, utility scripts, info panels for MetaTrader 4 & 5.</span></p>
+      </div>
+      <div class="service-item">
+        <span class="service-icon">🎓</span>
+        <div class="service-name"><span data-lang-inline="vi">Tư Vấn & Vận Hành</span><span data-lang-inline="en">Consulting & Operations</span></div>
+        <p class="service-desc"><span data-lang-inline="vi">Tư vấn chiến thuật, kỹ thuật vận hành bot, cài đặt tối ưu và quản lý rủi ro.</span><span data-lang-inline="en">Strategy consulting, bot operation techniques, optimal configuration and risk management.</span></p>
+      </div>
+    </div>
+    <div class="contact-info-bar">
+      <div class="contact-info-item"><span>📱</span><strong>0964 822 327</strong></div>
+      <div class="contact-info-item"><span>✈️</span><a href="https://t.me/tCode_T95" target="_blank">t.me/tCode_T95</a></div>
+      <div class="contact-info-item"><span>👥</span><a href="https://t.me/TCode_TradingHeBot" target="_blank">t.me/TCode_TradingHeBot</a></div>
+      <div class="contact-info-item"><span>📧</span><a href="mailto:tcodefx.auto@gmail.com">tcodefx.auto@gmail.com</a></div>
+    </div>
+  </div>
+
+  <div class="disclaimer reveal">
+    <span style="font-size:16px;flex-shrink:0;margin-top:1px">⚠️</span>
+    <span>
+      <strong><span data-lang-inline="vi">Lưu ý:</span><span data-lang-inline="en">Disclaimer:</span></strong>
+      <span data-lang-inline="vi"> Giao dịch CFD forex và Gold có rủi ro cao — bạn có thể mất toàn bộ vốn. Hãy hiểu rõ chiến lược và kiểm tra trên tài khoản demo trước khi chạy tài khoản thật.</span>
+      <span data-lang-inline="en"> Forex and gold trading carries high risk — you may lose all your capital. Understand the strategy thoroughly and test on a demo account before going live.</span>
+    </span>
+  </div>
+</div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p>© 2019 <span>TCode</span> · Expert Advisor MT5 · Made with ♥ for Traders</p>
+  <p style="margin-top:6px;opacity:0.4;font-size:10px">t.me/tCode_T95 · t.me/TCode_TradingHeBot · 0964 822 327 · tcodefx.auto@gmail.com</p>
+</footer>
+
+<script>
+/* ══ SCROLL REVEAL ══ */
+(function() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const siblings = Array.from(e.target.parentElement?.children || []);
+      const idx = siblings.indexOf(e.target);
+      setTimeout(() => e.target.classList.add('visible'), idx * 65);
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+})();
+
+/* ══ TABS ══ */
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const el = document.getElementById('tab-' + id);
+  if (el) el.classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+/* ══ LANGUAGE ══ */
+function setLang(lang) {
+  document.body.className = 'lang-' + lang;
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang);
+  });
+}
+</script>
 </body>
 </html>
